@@ -1,0 +1,8 @@
+*.tmp
+extracted_images/
+slot_map/
+photo_guide.html
+photo_guide_v3.html
+__pycache__/
+*.pyc
+.DS_Store
