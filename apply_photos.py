@@ -13,7 +13,7 @@ import fitz
 import os
 import sys
 
-PDF = "authfile1852026011497984810(1).pdf"
+PDF = "template_decrypted.pdf"
 PHOTOS_DIR = sys.argv[1] if len(sys.argv) > 1 else "photos"
 OUT_PDF = sys.argv[2] if len(sys.argv) > 2 else "output.pdf"
 

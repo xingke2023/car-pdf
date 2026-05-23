@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>检测认证评估报告 · {{ info.get('carModel','') }}</title>
+<style>
+/* ── 全局 ─────────────────────────────────────── */
+:root{
+  --navy:#1a3a6b; --navy-light:#2a5298; --blue-muted:#8c9ebe;
+  --line:#cccccc;  --bg-card:#f8f3f1;   --bg-gray:#f9f9f9;
+  --ok:#27ae60;    --limited:#e67e22;   --abnormal:#e74c3c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#e8e8e8;font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;font-size:8.5pt;color:#111}
+
+/* ── A4 页面 ──────────────────────────────────── */
+.page{
+  width:210mm; min-height:297mm; background:white;
+  margin:0 auto 16px; position:relative;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+@page{size:A4;margin:0}
+@media print{
+  body{background:white;margin:0}
+  .page{margin:0;box-shadow:none;page-break-after:always;page-break-inside:avoid}
+  .page:last-child{page-break-after:auto}
+  .no-print{display:none!important}
+  .print-spacer{display:none!important}
+}
+
+/* ── 打印工具栏 ───────────────────────────────── */
+.print-bar{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:var(--navy);color:white;
+  padding:9px 24px;display:flex;align-items:center;gap:14px;
+  font-size:13px;
+}
+.print-bar span{opacity:.8;font-size:12px}
+.print-bar .print-actions{margin-left:auto;display:flex;gap:8px}
+.print-bar button{
+  background:white;color:var(--navy);
+  border:none;padding:6px 20px;border-radius:5px;
+  font-weight:700;cursor:pointer;font-size:13px;
+}
+.print-bar button.btn-share{background:#ffd54d;color:#3a2c00}
+.print-bar button:hover{opacity:.9}
+.print-spacer{height:44px}
+
+/* ── 分享弹窗 ─────────────────────────────────── */
+.share-mask{
+  display:none;position:fixed;inset:0;z-index:10000;
+  background:rgba(0,0,0,.55);
+  align-items:center;justify-content:center;
+}
+.share-mask.open{display:flex}
+.share-panel{
+  background:white;border-radius:10px;width:340px;max-width:92vw;
+  padding:22px 22px 18px;box-shadow:0 12px 40px rgba(0,0,0,.25);
+  font-family:inherit;color:#222;
+}
+.share-panel h3{font-size:16px;color:var(--navy);margin-bottom:14px;text-align:center}
+.share-qr{display:flex;justify-content:center;margin:6px 0 14px}
+.share-qr canvas,.share-qr img{display:block;border:1px solid #eee;padding:6px;background:white}
+.share-qr-tip{text-align:center;font-size:12px;color:#888;margin-bottom:14px}
+.share-link{
+  display:flex;border:1px solid #ddd;border-radius:6px;overflow:hidden;
+  font-size:12px;margin-bottom:14px;
+}
+.share-link input{
+  flex:1;border:none;outline:none;padding:8px 10px;font-size:12px;
+  background:#fafafa;color:#333;min-width:0;font-family:inherit;
+}
+.share-link button{
+  border:none;background:var(--navy);color:white;
+  padding:0 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;
+}
+.share-link button.copied{background:var(--ok)}
+.share-close{
+  display:block;margin:0 auto;border:1px solid #ddd;background:white;
+  padding:7px 30px;border-radius:5px;font-size:13px;cursor:pointer;color:#555;
+}
+.share-close:hover{background:#f5f5f5}
+
+/* ── 页眉页脚共用 ─────────────────────────────── */
+.pg-header{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:flex-end;align-items:center;
+  padding:36px 56px 6px 15px;font-size:6.5pt;color:#888;
+  background:white;z-index:2;
+}
+.pg-footer{
+  position:absolute;bottom:0;left:0;right:0;
+  text-align:center;font-size:6.5pt;color:#888;
+  padding:20px 4px;
+}
+.page-body{padding:40px 18mm 30px}
+
+/* ── 页1 封面（浅色调）─────────────────────────── */
+#p1{background:#e3e9f2;padding:0;overflow:hidden;border-top:6px solid var(--navy)}
+/* 右上角斜切装饰块 */
+#p1::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:260px;height:260px;background:rgba(26,58,107,.04);
+  transform:rotate(30deg);border-radius:12px;
+}
+#p1::after{
+  content:'';position:absolute;top:20px;right:20px;
+  width:160px;height:160px;background:rgba(26,58,107,.03);
+  transform:rotate(18deg);border-radius:8px;
+}
+/* 顶部品牌：国际检 居中放大 */
+.cover-logo-bar{
+  position:absolute;top:90px;left:0;right:0;
+  display:flex;flex-direction:column;align-items:center;
+  padding:0;
+}
+.cover-logo-text{
+  color:var(--navy);font-size:48pt;font-weight:800;
+  letter-spacing:10px;text-indent:10px;
+  margin:0;line-height:1;
+}
+.cover-report-no{
+  position:absolute;top:56px;right:56px;
+  color:#888;font-size:9pt;letter-spacing:.5px;
+}
+/* 左侧竖条 */
+.cover-left-bar{
+  position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(180deg,#4a90d9 0%,#1a5fb4 50%,transparent 100%);
+}
+/* 主标题区 */
+.cover-main{
+  position:absolute;top:54%;left:0;right:0;
+  transform:translateY(-50%);
+  padding:0 36px;
+}
+.cover-tag{
+  display:block;width:fit-content;background:rgba(74,144,217,.12);
+  border:1px solid rgba(74,144,217,.35);
+  color:#2a5298;font-size:6.5pt;letter-spacing:3px;
+  padding:4px 12px;border-radius:2px;margin:0 auto 18px;
+}
+.cover-title{
+  color:var(--navy);font-size:42pt;font-weight:900;
+  line-height:1.05;letter-spacing:3px;margin-bottom:6px;
+  text-align:center;white-space:nowrap;
+}
+.cover-title span{color:#4a90d9}
+.cover-en{
+  color:#9aa6bd;font-size:7pt;
+  letter-spacing:2px;margin-bottom:28px;
+  text-align:center;
+}
+.cover-divider{
+  width:48px;height:3px;margin:0 auto 24px;
+  background:linear-gradient(90deg,#4a90d9,transparent);
+  border:none;
+}
+.cover-info-row{display:flex;gap:28px;margin-bottom:8px;justify-content:center}
+.cover-info-item{}
+.cover-info-label{color:#9aa6bd;font-size:6pt;letter-spacing:1px;margin-bottom:3px}
+.cover-info-value{color:#333;font-size:13pt;font-weight:600;white-space:nowrap}
+.cover-info-date .cover-info-label{font-size:10pt}
+/* 底部公司栏 */
+.cover-footer{
+  position:absolute;bottom:120px;left:0;right:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:14px 36px;
+}
+.cover-company{color:#555;font-size:17pt;font-weight:400;white-space:nowrap}
+.cover-company-sub{display:none}
+.cover-page-no{display:none}
+/* 右下角装饰圆 */
+.cover-circle1{
+  position:absolute;bottom:60px;right:-40px;
+  width:200px;height:200px;border-radius:50%;
+  border:1px solid rgba(74,144,217,.20);
+}
+.cover-circle2{
+  position:absolute;bottom:30px;right:-80px;
+  width:280px;height:280px;border-radius:50%;
+  border:1px solid rgba(74,144,217,.12);
+}
+
+/* ── 页2 摘要 ─────────────────────────────────── */
+.report-title{text-align:center;font-size:22pt;font-weight:400;color:var(--navy);margin-bottom:26px}
+.info-grid{width:100%;border-collapse:collapse;margin-bottom:24px}
+.info-grid td{border:1px solid var(--line);padding:9px 10px;font-size:9.5pt;vertical-align:middle}
+.info-grid .lbl{color:#555;width:80px;background:#fafafa}
+.result-box{background:var(--bg-card);border:1px solid #ddd;border-radius:4px;padding:18px 10px;margin-bottom:22px}
+.result-box-title{text-align:center;font-size:17pt;font-weight:400;color:var(--navy);margin-bottom:14px}
+.result-badges{display:flex;justify-content:space-around;gap:8px}
+.badge{flex:1;text-align:center;padding:14px 6px;border-radius:4px}
+.badge.pass{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.35)}
+.badge.fail{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.35)}
+.badge-icon{font-size:22pt;margin-bottom:4px}
+.badge.pass .badge-icon{color:var(--ok)}
+.badge.fail .badge-icon{color:var(--abnormal)}
+.badge-label{font-size:10pt;font-weight:700;color:#333}
+.badge.pass .badge-verdict{color:var(--ok);font-size:9pt;font-weight:700;margin-top:2px}
+.badge.fail .badge-verdict{color:var(--abnormal);font-size:9pt;font-weight:700;margin-top:2px}
+.decl-box{background:var(--bg-card);border:1px solid #ddd;border-radius:4px;padding:14px;margin-bottom:18px}
+.decl-box-title{font-size:17pt;font-weight:400;color:var(--navy);text-align:center;margin-bottom:10px}
+.decl-text{font-size:8.5pt;color:#444;line-height:1.8}
+.footer-info{font-size:8.5pt;color:#555;line-height:2.2;margin-bottom:8px}
+.time-row{display:flex;justify-content:space-between;font-size:8.5pt;color:#555;margin-bottom:14px}
+.seal-area{position:absolute;bottom:50px;left:15mm;z-index:2}
+.seal-area img{width:88px;height:88px;object-fit:contain}
+
+/* ── 页3 详情 ─────────────────────────────────── */
+.section-title{font-size:13pt;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:4px;border-bottom:2px solid var(--navy)}
+.car-model-box{background:var(--bg-gray);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin-bottom:20px;font-size:8.5pt;line-height:1.8;color:#333}
+.detail-grid{width:100%;border-collapse:collapse;margin-bottom:22px}
+.detail-grid td{border:1px solid var(--line);padding:9px 10px;font-size:8.5pt;vertical-align:middle}
+.detail-grid .lbl{color:#555;width:80px;background:#fafafa;font-weight:600}
+.check-count-row{display:flex;gap:10px;margin-bottom:20px}
+.count-badge{flex:1;text-align:center;background:var(--navy);color:white;border-radius:5px;padding:12px 6px}
+.count-badge .num{font-size:18pt;font-weight:900}
+.count-badge .lbl{font-size:7pt;opacity:.85;margin-top:2px}
+.notes-box{background:var(--bg-gray);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin-bottom:20px;min-height:60px;font-size:8pt;color:#444;line-height:1.8}
+.sign-row{display:flex;align-items:center;gap:20px;font-size:8pt;color:#555}
+.sign-line{flex:1;border-bottom:1px solid var(--line);margin-top:20px}
+
+/* ── 照片页 ─────────────────────────────────────── */
+.photo-page-title{font-size:13pt;font-weight:700;color:var(--navy);margin-bottom:8px}
+.photo-page-sub{font-size:7pt;color:#555;line-height:1.6;margin-bottom:14px}
+.photo-row{display:flex;gap:10px;margin-bottom:6px}
+.photo-slot{flex:1;position:relative;background:#f0f0f0;border:1px solid #ddd;border-radius:3px;overflow:hidden}
+.photo-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-slot .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#bbb;font-size:8pt}
+.photo-slot .ph-num{font-size:16pt;font-weight:900;color:#ccc}
+.photo-label-row{display:flex;gap:10px;margin-bottom:14px}
+.photo-label{flex:1;text-align:center;font-size:8pt;color:#444;padding:3px 0;background:#fafafa;border:1px solid #eee;border-radius:2px}
+
+/* ── 检测项页（紧凑 3 列）─────────────────────── */
+.check-section-header{background:var(--navy);color:white;padding:4px 12px;border-radius:3px 3px 0 0;font-size:9pt;font-weight:700;margin-bottom:0;margin-top:8px}
+.check-section-header:first-child{margin-top:0}
+.check-section-desc{background:#eef2f8;border:1px solid #c8d4e4;border-top:none;padding:5px 12px;font-size:6.5pt;color:#445;line-height:1.5;margin-bottom:5px}
+.check-summary{background:#f5f5f5;border:1px solid var(--line);padding:6px 12px;font-size:7pt;color:#555;margin-bottom:8px;border-radius:2px}
+.check-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-bottom:none;margin-bottom:6px}
+.check-item{display:flex;align-items:center;gap:4px;padding:2.5px 6px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:6.5pt;min-width:0}
+.check-item:nth-child(3n){border-right:none}
+.ci-icon{width:11px;height:11px;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:7pt;font-weight:700}
+.ci-icon.ok{background:rgba(39,174,96,.15);color:var(--ok)}
+.ci-icon.limited{background:rgba(230,126,34,.15);color:var(--limited)}
+.ci-icon.abnormal{background:rgba(231,76,60,.15);color:var(--abnormal)}
+.ci-name{flex:1;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ci-status{font-size:6pt;font-weight:600;flex-shrink:0}
+
+/* ── 填满高度的页面布局 ───────────────────────── */
+.page-body.fill{
+  display:flex;flex-direction:column;
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  padding:70px 18mm 40px;
+}
+.sec-block{display:flex;flex-direction:column;min-height:0}
+.sec-block .check-grid{flex:1 1 auto;grid-auto-rows:minmax(min-content,1fr);margin-bottom:0}
+.disclaimer-block{display:flex;flex-direction:column;min-height:0}
+.disclaimer-block .disclaimer-text{flex:1 1 auto}
+.ci-status.ok{color:var(--ok)}
+.ci-status.limited{color:var(--limited)}
+.ci-status.abnormal{color:var(--abnormal)}
+
+/* ── 免责声明 ──────────────────────────────────── */
+.disclaimer-title{font-size:13pt;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:4px;border-bottom:2px solid var(--navy)}
+.disclaimer-text{font-size:9pt;color:#444;line-height:1.85}
+</style>
+</head>
+<body>
+
+<!-- 打印工具栏 -->
+<div class="print-bar no-print">
+  <strong>检测认证评估报告</strong>
+  <span>{{ info.get('carModel','') }}{% if info.get('reportNo') %} · {{ info.get('reportNo') }}{% endif %}</span>
+  <div class="print-actions">
+    <button class="btn-share" onclick="openShare()">↗ 转发</button>
+    <button onclick="window.print()">🖨 打印 / 导出PDF</button>
+  </div>
+</div>
+<div class="print-spacer no-print"></div>
+
+<!-- 分享弹窗 -->
+<div class="share-mask no-print" id="shareMask" onclick="if(event.target===this)closeShare()">
+  <div class="share-panel">
+    <h3>转发此份报告</h3>
+    <div class="share-qr" id="shareQr"></div>
+    <div class="share-qr-tip">微信扫码即可在手机上查看 · 链接 30 天内有效</div>
+    <div class="share-link">
+      <input id="shareLink" type="text" readonly>
+      <button id="shareCopyBtn" onclick="copyShareLink()">复制链接</button>
+    </div>
+    <button class="share-close" onclick="closeShare()">关闭</button>
+  </div>
+</div>
+
+{# ─────────────────────────────────────────────────────────── #}
+{# 第 1 页：封面                                               #}
+{# ─────────────────────────────────────────────────────────── #}
+<div class="page" id="p1">
+  <div class="cover-left-bar"></div>
+  <div class="cover-circle1"></div>
+  <div class="cover-circle2"></div>
+
+  <div class="cover-report-no">报告编号：{{ info.get('reportNo','') }}</div>
+
+  <div class="cover-logo-bar">
+    <div class="cover-logo-text">国际检</div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-tag">INSPECTION &amp; CERTIFICATION</div>
+    <div class="cover-title">检测认证<span>评估报告</span></div>
+    <div class="cover-en">VEHICLE INSPECTION &amp; CERTIFICATION REPORT</div>
+    {% if info.get('carModel') or info.get('vin') %}
+    <div class="cover-info-row">
+      {% if info.get('carModel') %}
+      <div class="cover-info-item">
+        <div class="cover-info-label">车型名称</div>
+        <div class="cover-info-value">{{ info.get('carModel','') }}</div>
+      </div>
+      {% endif %}
+      {% if info.get('vin') %}
+      <div class="cover-info-item">
+        <div class="cover-info-label">车架号 VIN</div>
+        <div class="cover-info-value">{{ info.get('vin','') }}</div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if info.get('checkDate') %}
+    <div class="cover-info-row">
+      <div class="cover-info-item cover-info-date">
+        <div class="cover-info-value">{{ info.get('checkDate','') }}</div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="cover-footer">
+    <div>
+      <div class="cover-company">检测评估单位：{{ company }}</div>
+    </div>
+    <div class="cover-page-no">1 / 10</div>
+  </div>
+</div>
+
+{# ─────────────────────────────────────────────────────────── #}
+{# 第 2 页：检测摘要                                           #}
+{# ─────────────────────────────────────────────────────────── #}
+<div class="page" id="p2">
+  <div class="pg-header">报告编号：{{ info.get('reportNo','') }}</div>
+  <div class="page-body" style="padding-top:70px">
+    <div class="report-title">车辆检测认证报告</div>
+
+    <table class="info-grid">
+      <tr>
+        <td class="lbl">车型名称</td>
+        <td colspan="3">{{ info.get('carModel','') }}</td>
+      </tr>
+      <tr>
+        <td class="lbl">车辆颜色</td>
+        <td>{{ info.get('carColor','') }}</td>
+        <td class="lbl" style="width:80px">车架号</td>
+        <td>{{ info.get('vin','') }}</td>
+      </tr>
+    </table>
+
+    <div class="result-box">
+      <div class="result-box-title">检测结果</div>
+      <div style="text-align:center;font-size:22pt;font-weight:700;color:#e74c3c;margin-bottom:12px">S级</div>
+      <div class="result-badges">
+        <div class="badge {{ 'pass' if ac_pass else 'fail' }}">
+          <div class="badge-icon">{{ '✓' if ac_pass else '✕' }}</div>
+          <div class="badge-label">事故检测</div>
+          <div class="{{ 'badge-pass-verdict' if ac_pass else 'badge-fail-verdict' }}" style="font-size:8pt;font-weight:700;margin-top:3px;color:{{ '#27ae60' if ac_pass else '#e74c3c' }}">
+            {{ '非重大事故车' if ac_pass else '存在事故痕迹' }}
+          </div>
+        </div>
+        <div class="badge {{ 'pass' if wt_pass else 'fail' }}">
+          <div class="badge-icon">{{ '✓' if wt_pass else '✕' }}</div>
+          <div class="badge-label">泡水检测</div>
+          <div style="font-size:8pt;font-weight:700;margin-top:3px;color:{{ '#27ae60' if wt_pass else '#e74c3c' }}">
+            {{ '非泡水车' if wt_pass else '存在泡水痕迹' }}
+          </div>
+        </div>
+        <div class="badge {{ 'pass' if fr_pass else 'fail' }}">
+          <div class="badge-icon">{{ '✓' if fr_pass else '✕' }}</div>
+          <div class="badge-label">火烧检测</div>
+          <div style="font-size:8pt;font-weight:700;margin-top:3px;color:{{ '#27ae60' if fr_pass else '#e74c3c' }}">
+            {{ '非火烧车' if fr_pass else '存在火烧痕迹' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="decl-box">
+      <div class="decl-box-title">检测声明</div>
+      <div class="decl-text">
+        检测标准：本公司检测标准 GB/T-30323-2013 二手车鉴定评估技术规范 + T/CADA18-2021 乘用车鉴定评估技术规范 +
+        {{ company_short }}检测标准等相关检测标准综合评估而成，检测结果仅代表{{ company_short }}检测评估结果。最终解释权归{{ company_short }}所有
+        （{{ company }}）
+      </div>
+    </div>
+
+    <div class="time-row">
+      <span>检测下单：{{ info.get('orderTime','') }}</span>
+      <span>检测完成：{{ info.get('completeTime','') }}</span>
+      <span>出具报告：{{ info.get('reportTime','') }}</span>
+    </div>
+
+    <div style="position:relative;margin-top:80px">
+      <div class="footer-info">
+        检测单位：{{ company }}<br>
+        <span style="margin-right:40px">报告日期：{{ info.get('checkDate','') }}</span><span>客服电话：{{ info.get('phone','') }}</span><br>
+        温馨提示：车辆信息仅供参考，实际车型与配置信息请以实车为准，此证书手写无效。
+      </div>
+      {% if seal_image %}
+      <div style="position:absolute;top:-10px;left:100px">
+        <img src="{{ seal_image }}" alt="公章" style="width:88px;height:88px;object-fit:contain">
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <div class="pg-footer">2 / 10</div>
+</div>
+
+{# ─────────────────────────────────────────────────────────── #}
+{# 第 3 页：基本信息                                           #}
+{# ─────────────────────────────────────────────────────────── #}
+<div class="page" id="p3">
+  <div class="pg-header">报告编号：{{ info.get('reportNo','') }}</div>
+  <div class="page-body" style="padding-top:70px">
+
+    <div class="section-title">车型核实</div>
+    <div class="car-model-box">
+      与第三方车型库参数对比后，判定此车大概率为：<strong>{{ info.get('carModel','') }}</strong>
+    </div>
+
+    <div class="section-title">基本信息</div>
+    <table class="detail-grid">
+      <tr>
+        <td class="lbl">初登日期</td><td>{{ info.get('regDate','') }}</td>
+        <td class="lbl">表显里程</td><td>{{ info.get('mileage','') }}{% if info.get('mileage') %} km{% endif %}</td>
+      </tr>
+      <tr>
+        <td class="lbl">VIN</td><td>{{ info.get('vin','') }}</td>
+        <td class="lbl">能源类型</td><td>{{ info.get('energy','') }}</td>
+      </tr>
+      <tr>
+        <td class="lbl">排量</td><td>{{ info.get('displacement','') }}</td>
+        <td class="lbl">车辆性质</td><td>{{ info.get('usage','非营运') }}</td>
+      </tr>
+    </table>
+
+    <div class="section-title">检测项目</div>
+    <div class="check-count-row">
+      {% for sec in sections %}
+      <div class="count-badge">
+        <div class="num">{{ sec.count }}</div>
+        <div class="lbl">{{ sec.name }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="section-title">评估师备注</div>
+    <div class="notes-box">{{ info.get('notes','') }}</div>
+
+    <div class="section-title">评估师签名</div>
+    <div class="sign-row">
+      <span>签名：</span>
+      {% if signature_image %}
+      <img src="{{ signature_image }}" alt="签名" style="height:36pt;margin-left:6px;vertical-align:middle">
+      {% endif %}
+      <span style="margin-left:32px">日期：{{ info.get('reportTime','') }}</span>
+    </div>
+
+  </div>
+  <div class="pg-footer">3 / 10</div>
+</div>
+
+{# ─────────────────────────────────────────────────────────── #}
+{# 第 4-7 页：车辆照片                                         #}
+{# ─────────────────────────────────────────────────────────── #}
+{% for pp in photo_pages %}
+<div class="page" id="p{{ pp.page }}">
+  <div class="pg-header">报告编号：{{ info.get('reportNo','') }}</div>
+  <div class="page-body" style="padding-top:70px">
+    <div class="photo-page-title">{{ pp.title }}</div>
+    {% if pp.subtitle %}<div class="photo-page-sub">{{ pp.subtitle }}</div>{% endif %}
+
+    {% for row in pp.rows %}
+    {# 照片行 #}
+    <div class="photo-row" style="height:{{ (170 / pp.rows|length)|int }}mm">
+      {% for slot_num in row.slots %}
+      {% set img = photos.get(slot_num|string) or photos.get(slot_num) %}
+      <div class="photo-slot">
+        {% if img %}
+          <img src="{{ img }}" alt="照片{{ '%02d'|format(slot_num) }}">
+        {% else %}
+          <div class="ph">
+            <div class="ph-num">{{ '%02d'|format(slot_num) }}</div>
+            <div>暂无照片</div>
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {# 如果只有1张，补一个空格 #}
+      {% if row.slots|length == 1 %}
+      <div class="photo-slot" style="background:transparent;border-color:transparent"></div>
+      {% endif %}
+    </div>
+    {# 标签行 #}
+    <div class="photo-label-row">
+      {% for label in row.labels %}
+      <div class="photo-label">{{ label }}</div>
+      {% endfor %}
+      {% if row.labels|length == 1 %}
+      <div class="photo-label" style="background:transparent;border-color:transparent"></div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+  </div>
+  <div class="pg-footer">{{ pp.page }} / 10</div>
+</div>
+{% endfor %}
+
+{# ─────────────────────────────────────────────────────────── #}
+{# 第 8-10 页：检测项清单（紧凑版，按 section 分组）           #}
+{# ─────────────────────────────────────────────────────────── #}
+{% set page_groups = [
+  {'page': 8, 'sec_ids': ['ac', 'wt']},
+  {'page': 9, 'sec_ids': ['fr', 'ex']},
+] %}
+{% for pg in page_groups %}
+<div class="page" id="p{{ pg.page }}">
+  <div class="pg-header">报告编号：{{ info.get('reportNo','') }}</div>
+  <div class="page-body fill">
+    {% for sec in sections %}
+      {% if sec.id in pg.sec_ids %}
+        {% set ab_cnt = sec['items'] | selectattr('status','ne','正常') | list | length %}
+        <div class="sec-block" style="flex-grow:{{ sec['items']|length }};margin-bottom:8px">
+          <div class="check-section-header">{{ sec.name }}（{{ sec.count }}项）{% if ab_cnt > 0 %} · <span style="color:#ffcc80">{{ ab_cnt }}项异常</span>{% endif %}</div>
+          <div class="check-section-desc">{{ sec.desc }}</div>
+          <div class="check-grid">
+            {% for item in sec['items'] %}
+              {% set sc = item.status | status_class %}
+              <div class="check-item">
+                <div class="ci-icon {{ sc }}">{{ '✓' if sc == 'ok' else ('~' if sc == 'limited' else '✕') }}</div>
+                <div class="ci-name">{{ item.name }}</div>
+                <div class="ci-status {{ sc }}">{{ item.status }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="pg-footer">{{ pg.page }} / 10</div>
+</div>
+{% endfor %}
+
+{# ─────────────────────────────────────────────────────────── #}
+{# 第 10 页：记录模块 + 免责声明                               #}
+{# ─────────────────────────────────────────────────────────── #}
+<div class="page" id="p10">
+  <div class="pg-header">报告编号：{{ info.get('reportNo','') }}</div>
+  <div class="page-body fill">
+
+    {% for sec in sections %}
+      {% if sec.id == 'rc' %}
+        {% set ab_cnt = sec['items'] | selectattr('status','ne','正常') | list | length %}
+        <div class="sec-block" style="flex-grow:{{ sec['items']|length * 2 }};margin-bottom:10px">
+          <div class="check-section-header">{{ sec.name }}（{{ sec.count }}项）{% if ab_cnt > 0 %} · <span style="color:#ffcc80">{{ ab_cnt }}项异常</span>{% endif %}</div>
+          <div class="check-section-desc">{{ sec.desc }}</div>
+          <div class="check-grid">
+            {% for item in sec['items'] %}
+              {% set sc = item.status | status_class %}
+              <div class="check-item">
+                <div class="ci-icon {{ sc }}">{{ '✓' if sc == 'ok' else ('~' if sc == 'limited' else '✕') }}</div>
+                <div class="ci-name">{{ item.name }}</div>
+                <div class="ci-status {{ sc }}">{{ item.status }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    <div class="disclaimer-block" style="flex-grow:60">
+      <div class="disclaimer-title">免责声明</div>
+      <div class="disclaimer-text" style="line-height:2.3">
+        温馨提示：1、本服务由{{ company }}提供。
+        2、{{ company_short }}对指定车辆进行不解体静态检测，即车辆处于原地静止状态检测，动力系统仅限原地着车检测，不包含车辆动态行驶性能检测。
+        3、根据检测需要仅对车辆辅件、内饰进行拆解，不对车辆加强件、结构件、动力总成做深度拆解。
+        4、车辆基础信息是检测人员根据所检测车辆权属证书等资料进行填写的，如有不一致，以车辆实际权属证书等资料信息为准。
+        5、本检测报告中的"表显里程"是检测人员根据所检测车辆仪表上显示的里程数进行填写的，仅供参考。
+        6、如检测过程中车辆某检测项需使用举升机或需要拆解，但车主拒绝，报告中此检测项将展示"受限"字样；如检测过程中车辆某检测项受外部环境或其他原因影响导致无法检测，报告中此检测项将展示"受限"字样；{{ company_short }}不对以上检测项产生的任何疑问负责。
+        7、如对检测标准有异议或需要对检测报告进行解读，请联系{{ company_short }}客服。
+        8、本公司检测标准 GB/T-30323-2013 二手车鉴定评估技术规范 + T/CADA18-2021 乘用车鉴定评估技术规范 + {{ company_short }}检测标准等相关检测标准综合评估而成，检测结果仅代表{{ company_short }}检测评估结果。最终解释权归{{ company_short }}所有（{{ company }}）。
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">10 / 10</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+function openShare(){
+  var url = window.location.href;
+  document.getElementById('shareLink').value = url;
+  var qrBox = document.getElementById('shareQr');
+  qrBox.innerHTML = '';
+  try{
+    var qr = qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    qrBox.innerHTML = qr.createImgTag(5, 8);
+  }catch(e){
+    qrBox.innerHTML = '<span style="color:#999;font-size:12px">二维码生成失败（请使用复制链接）</span>';
+  }
+  document.getElementById('shareMask').classList.add('open');
+}
+function closeShare(){
+  document.getElementById('shareMask').classList.remove('open');
+}
+function copyShareLink(){
+  var input = document.getElementById('shareLink');
+  var btn = document.getElementById('shareCopyBtn');
+  var done = function(){
+    var orig = btn.textContent;
+    btn.textContent = '已复制 ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(input.value).then(done, function(){
+      input.select(); document.execCommand('copy'); done();
+    });
+  }else{
+    input.select(); document.execCommand('copy'); done();
+  }
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeShare();
+});
+</script>
+
+</body>
+</html>

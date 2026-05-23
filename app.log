@@ -1,0 +1,1405 @@
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 617-482-885
+127.0.0.1 - - [17/May/2026 09:30:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:36] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [17/May/2026 09:30:40] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:44] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:45] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:45] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:45] "GET /slot-preview/05.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:46] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:46] "GET /slot-preview/07.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:46] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:46] "GET /slot-preview/09.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:46] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:47] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:47] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:47] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:47] "GET /slot-preview/14.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:47] "GET /slot-preview/15.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:48] "GET /slot-preview/16.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:48] "GET /slot-preview/17.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:48] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:48] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [17/May/2026 09:30:48] "GET /slot-preview/20.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:49] "GET /slot-preview/21.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:49] "GET /slot-preview/22.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:49] "GET /slot-preview/23.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:49] "GET /slot-preview/24.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:50] "GET /slot-preview/25.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:52] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:30:56] "GET /report/html/bcead537454647478ac74b44d953b04e HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:31:00] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:31:03] "GET /report/pdf/3693888bf3364b4eb142c873c1417a04 HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:31:04] "GET /report/pdf/3693888bf3364b4eb142c873c1417a04 HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 09:58:39] "HEAD / HTTP/1.1" 200 -
+147.185.132.38 - - [17/May/2026 10:42:50] "GET /.well-known/security.txt HTTP/1.1" 404 -
+127.0.0.1 - - [17/May/2026 10:54:32] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 11:08:44] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 11:08:45] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [17/May/2026 11:10:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 11:10:43] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+185.247.137.34 - - [17/May/2026 12:25:00] "GET / HTTP/1.1" 200 -
+79.124.59.86 - - [17/May/2026 13:39:49] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [17/May/2026 13:39:49] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [17/May/2026 15:37:26] "GET /.env HTTP/1.1" 404 -
+127.0.0.1 - - [17/May/2026 17:52:11] "GET / HTTP/1.1" 200 -
+79.124.59.86 - - [17/May/2026 23:11:06] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [17/May/2026 23:11:06] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [18/May/2026 00:08:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 00:20:57] "GET /robots.txt HTTP/1.1" 404 -
+5.61.209.224 - - [18/May/2026 01:09:39] "GET /..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd HTTP/1.1" 404 -
+185.247.137.125 - - [18/May/2026 01:46:58] "GET / HTTP/1.1" 200 -
+220.196.160.117 - - [18/May/2026 01:54:21] "GET / HTTP/1.1" 200 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 706-875-610
+127.0.0.1 - - [18/May/2026 10:12:42] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:13:01] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:13:02] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:14:18] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:14:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:14:40] "GET /slot-preview/01.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:14:52] "GET /slot-preview/02.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:01] "GET /slot-preview/03.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:02] "GET /slot-preview/04.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:02] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:15:02] "GET /slot-preview/06.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:03] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:15:03] "GET /slot-preview/08.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:03] "GET /slot-preview/09.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:03] "GET /slot-preview/10.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:04] "GET /slot-preview/11.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:04] "GET /slot-preview/12.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:04] "GET /slot-preview/13.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:04] "GET /slot-preview/14.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:04] "GET /slot-preview/15.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:05] "GET /slot-preview/16.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:05] "GET /slot-preview/17.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:05] "GET /slot-preview/18.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:05] "GET /slot-preview/19.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:06] "GET /slot-preview/20.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:06] "GET /slot-preview/21.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:06] "GET /slot-preview/22.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:06] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:15:07] "GET /slot-preview/24.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:07] "GET /slot-preview/25.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:22] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:15:24] "GET /report/pdf/ddb9e125b6d04f32bcccd164c215e140 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:20:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:20:50] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 10:20:55] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:56] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:56] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:56] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:56] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:57] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:57] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:57] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:57] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:57] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:57] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:58] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:58] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:58] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:58] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:58] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:58] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:59] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:59] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:59] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:59] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:59] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:20:59] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:21:00] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:21:10] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:21:11] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:21:12] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 10:21:14] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 10:21:16] "GET /report/html/e5bcec3914cf4fc1a3ac214777dbaca0 HTTP/1.1" 200 -
+178.159.37.70 - - [18/May/2026 10:22:05] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+178.159.37.70 - - [18/May/2026 10:22:05] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 133-757-813
+127.0.0.1 - - [18/May/2026 16:39:12] "GET / HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 133-757-813
+127.0.0.1 - - [18/May/2026 16:41:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:41:04] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 16:41:07] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:13] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:13] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:13] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:14] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:14] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:14] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:14] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:14] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:15] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:15] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:15] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:16] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:16] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:16] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:16] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:16] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:17] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:17] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:17] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:17] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:17] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:18] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:18] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:18] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:41:20] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:41:22] "GET /report/html/b3486004741248aeb894e5f1944ca40d HTTP/1.1" 200 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+127.0.0.1 - - [18/May/2026 16:42:01] "GET / HTTP/1.1" 200 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+127.0.0.1 - - [18/May/2026 16:42:14] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:43:06] "GET /report/html/b3486004741248aeb894e5f1944ca40d HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 16:43:19] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:43:21] "GET /report/html/573d4faf53d444fcb1dc36f238605699 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:44:26] "GET /report/html/573d4faf53d444fcb1dc36f238605699 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:44:27] "GET /report/html/573d4faf53d444fcb1dc36f238605699 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:44:27] "GET /report/html/573d4faf53d444fcb1dc36f238605699 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:44:30] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:44:33] "GET /report/html/0d6c7928b7a049d094faca8a541db7b7 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:45:56] "GET /report/html/0d6c7928b7a049d094faca8a541db7b7 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:45:59] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:46:00] "GET /report/html/236c6ac1182c48e3bd28aa846062cb49 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:46:59] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:47:00] "GET /report/html/79d16932d1f54766b94b623b579b4eaa HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:48:11] "GET /report/html/79d16932d1f54766b94b623b579b4eaa HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:48:13] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:48:14] "GET /report/html/f016617bad96407284b723f5b8bbf893 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:48:48] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:48:49] "GET /report/html/d088a4fa6a4e47b1b3b8f76ec8905d20 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:49:47] "GET /report/html/d088a4fa6a4e47b1b3b8f76ec8905d20 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:49:49] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:49:50] "GET /report/html/09499d10122e453ca27590667e738075 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:50:32] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:50:33] "GET /report/html/f01c70bfffd8405294c3de5f09ea6c6c HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:50:55] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:50:56] "GET /report/html/ae18c8a8ce0b4332aa24a91517982d35 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:51:30] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:51:31] "GET /report/html/07b57fd8d313480aa61e2fe96050b296 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:51:45] "GET /report/pdf/9b3cbb571743454884bae57eb6c34ed6 HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 16:51:46] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 16:52:14] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:52:15] "GET /report/html/acbb1f64740e4321a507174bc5293209 HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:52:44] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:52:45] "GET /report/html/7484836d454e4e50adfd2d4fee039f8e HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:53:29] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:53:30] "GET /report/html/22612875d8da4a9a9f6a5b0c1a79d87a HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:54:27] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:54:28] "GET /report/html/5507ad93a1a84790af5aaf5729afd3cb HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:56:19] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:56:20] "GET /report/html/3dbfbcd605df49db9210c3942aae8f49 HTTP/1.1" 200 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+127.0.0.1 - - [18/May/2026 16:57:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:57:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:57:54] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 16:57:56] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:57] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:57] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:57] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:57] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:58] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:58] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:58] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:58] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:58] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:59] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:59] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:59] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:59] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:59] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:57:59] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:00] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:00] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:00] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:00] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:00] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:01] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:01] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:01] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:02] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 16:58:03] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:58:04] "GET /report/html/954bb47c9c064a5f90c2be92cb880ba0 HTTP/1.1" 200 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+127.0.0.1 - - [18/May/2026 16:59:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:59:45] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 16:59:46] "GET /report/html/8136196950704ad3879975bebfc6443c HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 17:01:38] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 17:01:39] "GET /report/html/916e43d1a20440f4be7b813bdb14c43d HTTP/1.1" 200 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+127.0.0.1 - - [18/May/2026 17:03:16] "GET / HTTP/1.1" 200 -
+162.216.149.94 - - [18/May/2026 17:17:11] "GET / HTTP/1.0" 200 -
+162.216.149.94 - - [18/May/2026 17:17:35] "GET / HTTP/1.1" 200 -
+162.216.149.94 - - [18/May/2026 17:18:32] code 400, message Bad request version ('\x00/\x00')
+162.216.149.94 - - [18/May/2026 17:18:32] "\x16\x03\x00\x00i\x01\x00\x00e\x03\x03U\x1c§ärandom1random2random3random4\x00\x00\x0c\x00/\x00" 400 -
+162.216.149.94 - - [18/May/2026 17:22:39] code 400, message Bad request version ('\x00/\x00')
+162.216.149.94 - - [18/May/2026 17:22:39] "\x16\x03\x00\x00i\x01\x00\x00e\x03\x03U\x1c§ärandom1random2random3random4\x00\x00\x0c\x00/\x00" 400 -
+180.101.245.252 - - [18/May/2026 17:26:39] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 18:27:16] "GET /.env HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 18:30:52] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 18:30:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 18:30:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 18:51:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 18:51:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 18:51:26] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:34] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:39] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:40] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:41] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:41] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:41] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:41] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:42] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:44] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:44] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:45] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:45] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:45] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:51] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:51] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:51] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:52] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:52] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:52] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:52] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:52] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:52] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:53] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:53] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [18/May/2026 18:51:58] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 18:52:11] "GET /report/pdf/b369ff8b1d95405b84451184669b7b80 HTTP/1.1" 200 -
+195.178.110.114 - - [18/May/2026 19:10:05] code 400, message Bad request syntax ('SSH-2.0-Go')
+195.178.110.114 - - [18/May/2026 19:10:05] "SSH-2.0-Go" 400 -
+127.0.0.1 - - [18/May/2026 21:50:06] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 21:50:08] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 23:03:30] "GET /.env HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 23:28:28] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [18/May/2026 23:28:32] "GET /css/support_parent.css HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 23:28:34] "GET /static/style/protect/index.js HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 23:28:37] "GET /assets/js/auth.js HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 23:28:39] "GET /bot-connect.js HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 23:28:42] "GET /assets/js/message.js HTTP/1.1" 404 -
+127.0.0.1 - - [18/May/2026 23:28:57] "GET /js/twint_ch.js HTTP/1.1" 404 -
+79.124.59.86 - - [18/May/2026 23:49:37] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [18/May/2026 23:49:37] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [19/May/2026 02:54:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:54:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:01] "GET /slot-preview/01.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:11] "GET /slot-preview/02.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:18] "GET /slot-preview/03.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:19] "GET /slot-preview/04.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:19] "GET /slot-preview/05.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:19] "GET /slot-preview/06.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:20] "GET /slot-preview/07.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:20] "GET /slot-preview/08.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:20] "GET /slot-preview/09.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:20] "GET /slot-preview/10.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:20] "GET /slot-preview/11.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:21] "GET /slot-preview/12.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:21] "GET /slot-preview/13.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:21] "GET /slot-preview/14.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:21] "GET /slot-preview/15.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:21] "GET /slot-preview/16.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:21] "GET /slot-preview/17.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:22] "GET /slot-preview/18.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:22] "GET /slot-preview/19.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:22] "GET /slot-preview/20.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:22] "GET /slot-preview/21.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:22] "GET /slot-preview/22.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:22] "GET /slot-preview/23.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:23] "GET /slot-preview/24.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:23] "GET /slot-preview/25.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:30] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 02:56:32] "GET /report/pdf/9425553283aa4ed68a231132ad72152e HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:00:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:00:59] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 03:01:06] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:34] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 03:03:46] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:46] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:46] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:46] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:46] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:46] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:47] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:47] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:47] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:47] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:47] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:47] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:48] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:48] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:48] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:48] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:48] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:48] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:49] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:49] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:49] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:49] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:49] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:50] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 03:03:52] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:03:54] "GET /report/html/b057a48f675a42f896de5ec452bee7ec HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:06:55] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:06:57] "GET /report/html/fe9c1c4bb1904aa28269929b5748869c HTTP/1.1" 200 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 817-587-271
+127.0.0.1 - - [19/May/2026 03:10:35] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:10:37] "GET /report/html/d73cafeb582048f4a69cd0cd991102f7 HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:12:31] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 03:12:32] "GET /report/html/4a8643c0d5c4482bac26e2fde84af849 HTTP/1.1" 200 -
+212.73.148.17 - - [19/May/2026 03:44:46] code 400, message Bad request version ('À\x14À')
+212.73.148.17 - - [19/May/2026 03:44:46] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03òæ\x7f\x9e\\F³1\\\\B¡ë\x96\x81\x91\x07\x8d\x97'y,\x01ø\x86iVl ;\x9f¿ [»m°\x16L\x90\x0dë<Þ¬\x84Ç\x1e/Ë[ï?\x93xî³Ú¤«\x08çõÜU\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À" 400 -
+185.247.137.126 - - [19/May/2026 07:22:15] "GET / HTTP/1.1" 200 -
+220.196.160.101 - - [19/May/2026 07:23:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 08:05:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 08:05:59] "GET /.git/config HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:00] "POST / HTTP/1.1" 405 -
+127.0.0.1 - - [19/May/2026 08:06:00] "GET /.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:01] "GET /.env.local HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:01] "GET /.env.production HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:01] "GET /.env.staging HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:02] "GET /.env.development HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:03] "GET /.env.test HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:03] "GET /.env.remote HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:03] "GET /.env.bak HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:04] "GET /.env.backup HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:04] "GET /.env.save HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:05] "GET /.env.old HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:05] "GET /.env.sample HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:06] "GET /.env.example HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:06] "GET /.env.dev HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:07] "GET /.env.prod HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:07] "GET /.env.stage HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:08] "GET /.env.ci HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:08] "GET /.env.docker HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:09] "GET /.env.live HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:09] "GET /.env.preprod HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:10] "GET /.env.uat HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:10] "GET /.env.dist HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:10] "GET /.env.swp HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:11] "GET /.env~ HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:12] "GET /.env1 HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:13] "GET /.env2 HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:13] "GET /.env_copy HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:14] "GET /.env.txt HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:14] "GET /.env.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:15] "GET /.env.yaml HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:15] "GET /.env.yml HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:16] "GET /app/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:16] "GET /apps/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:17] "GET /api/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:18] "GET /web/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:19] "GET /site/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:19] "GET /public/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:20] "GET /admin/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:20] "GET /backend/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:21] "GET /server/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:21] "GET /frontend/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:22] "GET /src/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:22] "GET /core/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:23] "GET /core/app/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:23] "GET /config/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:24] "GET /private/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:24] "GET /application/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:24] "GET /bootstrap/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:25] "GET /database/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:26] "GET /storage/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:26] "GET /var/www/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:27] "GET /var/www/html/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:27] "GET /current/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:28] "GET /release/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:28] "GET /releases/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:29] "GET /shared/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:29] "GET /deploy/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:30] "GET /build/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:30] "GET /dist/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:30] "GET /public_html/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:31] "GET /htdocs/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:31] "GET /www/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:32] "GET /html/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:33] "GET /live/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:33] "GET /prod/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:34] "GET /dev/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:34] "GET /staging/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:35] "GET /opt/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:35] "GET /laravel/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:36] "GET /symfony/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:36] "GET /wordpress/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:38] "GET /wp/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:38] "GET /cms/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:39] "GET /drupal/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:40] "GET /joomla/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:40] "GET /magento/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:41] "GET /shopify/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:41] "GET /prestashop/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:42] "GET /codeigniter/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:42] "GET /cakephp/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:43] "GET /zend/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:43] "GET /yii/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:44] "GET /laravel5/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:44] "GET /v1/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:45] "GET /v2/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:45] "GET /v3/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:46] "GET /api/v1/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:46] "GET /api/v2/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:47] "GET /rest/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:47] "GET /graphql/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:48] "GET /gateway/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:48] "GET /microservice/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:48] "GET /service/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:49] "GET /api/v3/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:49] "GET /api/dev/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:50] "GET /api/staging/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:50] "GET /vendor/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:51] "GET /lib/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:51] "GET /resources/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:52] "GET /assets/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:52] "GET /uploads/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:53] "GET /internal/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:53] "GET /tools/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:54] "GET /scripts/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:54] "GET /bin/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:55] "GET /sbin/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:55] "GET /local/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:56] "GET /portal/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:56] "GET /dashboard/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:57] "GET /panel/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:57] "GET /crm/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:58] "GET /erp/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:58] "GET /shop/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:59] "GET /store/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:59] "GET /saas/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:06:59] "GET /client/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:00] "GET /project/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:00] "GET /admin-panel/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:01] "GET /control-panel/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:01] "GET /user-panel/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:02] "GET /node/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:02] "GET /express/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:03] "GET /next/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:03] "GET /nuxt/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:04] "GET /nest/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:04] "GET /react/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:05] "GET /vue/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:06] "GET /angular/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:06] "GET /svelte/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:07] "GET /vite/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:07] "GET /backup/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:07] "GET /backups/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:08] "GET /old/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:08] "GET /tmp/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:09] "GET /temp/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:09] "GET /lab/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:10] "GET /cronlab/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:10] "GET /cron/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:11] "GET /en/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:12] "GET /administrator/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:12] "GET /psnlink/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:12] "GET /exapi/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:13] "GET /sitemaps/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:14] "GET /.env.backup1 HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:14] "GET /.env.backup2 HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:15] "GET /logs/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:16] "GET /cache/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:16] "GET /mailer/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:17] "GET /mail/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:18] "GET /email/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:18] "GET /smtp/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:19] "GET /mailing/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:19] "GET /notifications/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:20] "GET /notify/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:20] "GET /sender/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:21] "GET /campaign/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:21] "GET /newsletter/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:22] "GET /ses/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:22] "GET /sendgrid/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:23] "GET /sparkpost/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:23] "GET /postmark/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:24] "GET /mailgun/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:24] "GET /mandrill/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:25] "GET /mailjet/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:25] "GET /brevo/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:26] "GET /transactional/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:27] "GET /bulk/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:27] "GET /aws/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:28] "GET /azure/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:28] "GET /gcp/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:29] "GET /cloud/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:29] "GET /infrastructure/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:30] "GET /docker/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:30] "GET /k8s/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:31] "GET /kubernetes/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:31] "GET /terraform/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:32] "GET /ansible/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:32] "GET /.git/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:32] "GET /ci/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:33] "GET /cd/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:34] "GET /jenkins/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:34] "GET /gitlab/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:35] "GET /github/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:35] "GET /actions/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:35] "GET /circleci/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:36] "GET /travis/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:36] "GET /buildkite/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:37] "GET /mysql/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:37] "GET /postgres/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:38] "GET /mongodb/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:38] "GET /redis/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:39] "GET /elasticsearch/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:39] "GET /rabbitmq/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:40] "GET /kafka/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:40] "GET /queue/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:41] "GET /worker/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:41] "GET /job/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:42] "GET /test/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:43] "GET /qa/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:43] "GET /preview/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:44] "GET /beta/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:45] "GET /uat/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:45] "GET /stage/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:45] "GET /development/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:46] "GET /production/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:46] "GET /config/app/.env HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:47] "GET /phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:48] "GET /info.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:48] "GET /php.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:49] "GET /i.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:49] "GET /pi.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:49] "GET /pinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:51] "GET /test.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:51] "GET /phpinfo HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:52] "GET /p.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:52] "GET /debug.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:53] "GET /admin/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:53] "GET /test/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:54] "GET /dev/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:54] "GET /old/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:54] "GET /tmp/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:55] "GET /public/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:56] "GET /info HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:56] "GET /php-info.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:57] "GET /phpversion.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:57] "GET /_phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:58] "GET /old_phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:58] "GET /server-info.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:59] "GET /server-status.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:07:59] "GET /_profiler/phpinfo HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:00] "GET /_environment HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:00] "GET /webroot/index.php/_environment HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:01] "GET /mail/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:01] "GET /cpanel/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:01] "GET /hosting/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:02] "GET /webmail/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:02] "GET /smtp/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:03] "GET /phpinfo.php.bak HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:03] "GET /phpinfo.php.old HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:04] "GET /phpinfo.php~ HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:04] "GET /info.php.bak HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:05] "GET /phpinfo.php.save HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:05] "GET /staging/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:06] "GET /beta/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:06] "GET /uat/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:07] "GET /qa/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:07] "GET /preview/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:08] "GET /www/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:08] "GET /htdocs/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:09] "GET /public_html/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:09] "GET /site/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:10] "GET /docs/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:11] "GET /wp-admin/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:11] "GET /administrator/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:12] "GET /core/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:13] "GET /includes/phpinfo.php HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:13] "GET /service-account.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:14] "GET /sa.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:14] "GET /gcp-key.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:15] "GET /gcp-credentials.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:15] "GET /gcp-sa.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:16] "GET /credentials.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:16] "GET /google-credentials.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:17] "GET /google-key.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:17] "GET /.config/gcloud/application_default_credentials.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:17] "GET /application_default_credentials.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:18] "GET /key.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:18] "GET /keyfile.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:18] "GET /firebase-adminsdk.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 08:08:19] "GET /firebase-key.json HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 09:46:21] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:39:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:39:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:44:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:26] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:34] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:45] "GET /slot-preview/03.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:46] "GET /slot-preview/04.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:46] "GET /slot-preview/05.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:46] "GET /slot-preview/06.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:46] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:47] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:47] "GET /slot-preview/09.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:47] "GET /slot-preview/10.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:47] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:47] "GET /slot-preview/12.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:48] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:48] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:48] "GET /slot-preview/15.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:48] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:48] "GET /slot-preview/17.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:45:48] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:49] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:49] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:49] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:49] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:50] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:50] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:50] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [19/May/2026 10:45:57] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:47:59] "GET /report/pdf/b8fe75049e7640e086a74e77c1e53900 HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:50:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:50:21] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 10:50:25] "GET /report/pdf/13cbb1ea77524378a697c111c1bd0c60 HTTP/1.1" 200 -
+222.129.37.110 - - [19/May/2026 11:56:58] "POST /login HTTP/1.1" 404 -
+127.0.0.1 - - [19/May/2026 13:11:51] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 13:15:33] "GET / HTTP/1.1" 200 -
+79.124.59.86 - - [19/May/2026 13:15:49] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [19/May/2026 13:15:49] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+87.236.176.11 - - [19/May/2026 14:39:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 15:03:45] "GET / HTTP/1.1" 200 -
+160.119.76.13 - - [19/May/2026 16:32:44] code 400, message Bad request syntax ('\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00')
+160.119.76.13 - - [19/May/2026 16:32:44] "\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00" 400 -
+160.119.76.13 - - [19/May/2026 16:33:31] code 400, message Bad request syntax ('\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00')
+160.119.76.13 - - [19/May/2026 16:33:31] "\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00" 400 -
+127.0.0.1 - - [19/May/2026 16:54:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 17:47:01] "GET /robots.txt HTTP/1.1" 404 -
+185.247.137.121 - - [19/May/2026 19:51:51] "GET / HTTP/1.1" 200 -
+180.101.244.14 - - [19/May/2026 19:52:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [19/May/2026 20:25:07] "GET / HTTP/1.1" 200 -
+85.217.149.28 - - [19/May/2026 20:57:34] code 400, message Bad request version ('À\x14À')
+85.217.149.28 - - [19/May/2026 20:57:34] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x037PÐß\x81³~ö\x8fW\x80Cñ8\x8bÛà.\x8cÀ=\x8e2!g©d\x05`\x83\x03\x00 êQ©VÛl7ì\x15³Nº\x88\x90\\\x95bnæ\x92÷*\x1c\x02Û¢Þm\x13s3ù\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À" 400 -
+127.0.0.1 - - [19/May/2026 21:00:12] "POST / HTTP/1.1" 405 -
+114.132.52.44 - - [19/May/2026 22:35:19] "GET / HTTP/1.1" 200 -
+79.124.59.86 - - [20/May/2026 00:22:22] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [20/May/2026 00:22:22] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+185.247.137.173 - - [20/May/2026 00:44:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 01:12:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 01:31:52] "GET /report/pdf/7536e921087e42889253f2d524c3387c HTTP/1.1" 404 -
+59.83.208.108 - - [20/May/2026 02:25:09] "GET / HTTP/1.1" 200 -
+212.73.148.26 - - [20/May/2026 02:38:17] code 400, message Bad request version ('À\x14À')
+212.73.148.26 - - [20/May/2026 02:38:17] "\x16\x03\x01\x00î\x01\x00\x00ê\x03\x03\x19F\x9c\x1dÝåu\x81K\x80ØR\x1c)\x0b{\x9aÍ\x80ºÁ¯Xi©\x93fYî6\x7f¡ ±i«\x1b\x92_Ù§I|ÎGiª´)ÖÍ\x92ê<&¬.ª\x18xß­õÊÇ\x00&Ì¨Ì©À/À0À+À,À\x13À\x09À\x14À" 400 -
+81.71.98.254 - - [20/May/2026 10:48:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:09:04] "POST / HTTP/1.1" 405 -
+127.0.0.1 - - [20/May/2026 11:33:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:33:58] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 11:34:00] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 11:34:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:00] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 11:34:05] "GET /slot-preview/01.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:12] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:12] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:12] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:13] "GET /slot-preview/05.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:13] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:13] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:14] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:14] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:14] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:14] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:14] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:14] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:15] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:15] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:15] "GET /slot-preview/16.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:15] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:15] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:15] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:16] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:16] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:16] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:16] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:16] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:34:17] "GET /slot-preview/25.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:18] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:20] "GET /report/html/0c2b799c367049f2a81c3259ab47ccb3 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:27] "GET /report/html/0c2b799c367049f2a81c3259ab47ccb3 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:45] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:46] "GET /report/pdf/ebd09631a22e4daebd7f176b21b0cfc0 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:34:47] "GET /report/pdf/ebd09631a22e4daebd7f176b21b0cfc0 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:35:10] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:35:13] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:35:15] "GET /report/html/160990e74704487da6d7e323fff42e59 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:36:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:36:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:36:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:37:00] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 11:37:01] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:02] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:02] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:02] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:03] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:03] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:03] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:03] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:03] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:04] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:04] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:04] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:04] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:04] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:05] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:05] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:05] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:05] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:05] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:06] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:06] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:06] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:06] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:07] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:07] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:37:09] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:37:10] "GET /report/html/95df8fb6766541f582ec8eac5838c060 HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 817-587-271
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 817-587-271
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 226-736-322
+127.0.0.1 - - [20/May/2026 11:41:32] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:41:34] "GET /report/html/524d79009ca44f05a950e4161fb7076a HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:41:56] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:41:58] "GET /report/html/ab4d64d86c6d4a78adbf0a5a726be2e9 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:42:00] "GET /report/html/ab4d64d86c6d4a78adbf0a5a726be2e9 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:42:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:43:28] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:43:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:35] "GET /slot-preview/02.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:37] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:37] "GET /slot-preview/04.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:37] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:37] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:38] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:41] "GET /slot-preview/08.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:41] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:41] "GET /slot-preview/10.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:41] "GET /slot-preview/11.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:41] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:42] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:42] "GET /slot-preview/14.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:42] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:42] "GET /slot-preview/16.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:42] "GET /slot-preview/17.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:42] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:43] "GET /slot-preview/19.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:43] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:43] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:43] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:43] "GET /slot-preview/23.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:43] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 11:44:44] "GET /slot-preview/25.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:48] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:44:49] "GET /report/pdf/6c86fd3cfcb04a20aefd76fb4136d0e4 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:46:34] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 11:48:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:48:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:49:57] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:50:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:50:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:51:40] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:51:58] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:52:01] "GET /report/pdf/e4158e62cdd3460991e708bcbbc713a2 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:52:27] "GET /report/pdf/e4158e62cdd3460991e708bcbbc713a2 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:52:29] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 11:53:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:54:17] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:54:20] "GET /report/pdf/36a9788877824af6a76fdbc47af17178 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:54:40] "GET /report/pdf/36a9788877824af6a76fdbc47af17178 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 11:57:50] "GET /report/pdf/36a9788877824af6a76fdbc47af17178 HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/car-pdf/make_cover.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 226-736-322
+ * Detected change in '/home/ubuntu/car-pdf/make_cover.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 226-736-322
+ * Detected change in '/home/ubuntu/car-pdf/make_cover.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 226-736-322
+ * Detected change in '/home/ubuntu/car-pdf/make_cover.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 226-736-322
+127.0.0.1 - - [20/May/2026 12:16:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:16:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:17:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:17:10] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 12:17:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:17:11] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 12:17:13] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:14] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:14] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:14] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:14] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:15] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:15] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:15] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:15] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:15] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:16] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:16] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:16] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:16] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:17] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:17] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:17] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:17] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:17] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:18] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:18] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:18] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:18] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:19] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:19] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 12:17:21] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:17:22] "GET /report/html/c9a43b7dffb043a5be22ee195133292e HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:17:23] "GET /report/html/c9a43b7dffb043a5be22ee195133292e HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:24:46] "GET /report/html/c9a43b7dffb043a5be22ee195133292e HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:25:00] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:25:02] "GET /report/html/500628b3ecb94513830fc0a7ab82320d HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:26:40] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:26:41] "GET /report/html/195467f0918f4273aaae598d744e935e HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:30:41] "GET /robots.txt HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 12:33:51] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:33:52] "GET /report/html/17d3e2a79bc94ea6ba4cc05ce97ccea0 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:43:44] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:43:44] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:43:45] "GET /report/html/98c3b4ec23b2458f8962faba1107e79f HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:45:17] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:45:18] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:45:36] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:45:49] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:47:08] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 12:47:10] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 12:48:06] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+87.236.176.29 - - [20/May/2026 13:09:44] "GET / HTTP/1.1" 200 -
+79.124.59.86 - - [20/May/2026 13:37:31] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [20/May/2026 13:37:31] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [20/May/2026 14:26:57] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:26:58] "GET /report/html/4049b5b60d154f6aabd9c4c4aca1f7ac HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:40:23] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:40:24] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 14:46:23] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 15:17:52] "GET /wp-json/gravitysmtp/v1/tests/mock-data?page=gravitysmtp-settings HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 15:42:33] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 15:42:41] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+45.87.249.190 - - [20/May/2026 15:43:06] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+45.87.249.190 - - [20/May/2026 15:43:06] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [20/May/2026 16:02:47] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 16:02:47] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 16:30:22] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 16:30:23] "GET /report/html/7303e69b72d5485ba2400dccd5812fb5 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 16:36:06] "GET /.git/config HTTP/1.1" 404 -
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 226-736-322
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+127.0.0.1 - - [20/May/2026 17:20:51] "GET /.git/config HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 17:27:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:27:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:27:55] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 17:27:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:27:55] "GET /pdf-lib.min.js.map HTTP/1.1" 404 -
+127.0.0.1 - - [20/May/2026 17:27:58] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:27:58] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:27:59] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:27:59] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:27:59] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:27:59] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:27:59] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:27:59] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:00] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:00] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:00] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:00] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:00] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:00] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:01] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:01] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:01] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:01] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:01] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:01] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:02] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:02] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:02] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:02] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:02] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:28:04] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:28:05] "GET /report/html/e3dd9a40ae4f4fd78b96dee75891f46d HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:33:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:34:16] "GET /report/html/e3dd9a40ae4f4fd78b96dee75891f46d HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:40:35] "POST /report/html HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+127.0.0.1 - - [20/May/2026 17:42:56] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:42:56] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:42:57] "GET /report/html/20260520-002 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:43:01] "GET /report/html/20260520-002 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:43:07] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:43:10] "GET /report/html/20260520-003 HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:43:23] "GET /slot-preview/01.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:24] "GET /slot-preview/02.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:25] "GET /slot-preview/03.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:25] "GET /slot-preview/04.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:25] "GET /slot-preview/05.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:25] "GET /slot-preview/06.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:25] "GET /slot-preview/07.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:25] "GET /slot-preview/08.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:26] "GET /slot-preview/09.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:26] "GET /slot-preview/10.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:26] "GET /slot-preview/11.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:26] "GET /slot-preview/12.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:27] "GET /slot-preview/13.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:27] "GET /slot-preview/14.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:27] "GET /slot-preview/15.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:27] "GET /slot-preview/16.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:27] "GET /slot-preview/17.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:27] "GET /slot-preview/18.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:28] "GET /slot-preview/19.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:28] "GET /slot-preview/20.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:28] "GET /slot-preview/21.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:28] "GET /slot-preview/22.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:28] "GET /slot-preview/23.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:28] "GET /slot-preview/24.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:29] "GET /slot-preview/25.jpg HTTP/1.1" 304 -
+127.0.0.1 - - [20/May/2026 17:43:31] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:43:32] "GET /report/html/20260520-12432ERDRSEFASD HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:44:40] "GET /report/html/20260520-12432ERDRSEFASD HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:50:05] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:50:05] "GET /report/html/20260520-12432ERDRSEFASD HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:52:20] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 17:52:21] "GET /report/html/20260520-12432ERDRSEFASD HTTP/1.1" 200 -
+87.236.176.157 - - [20/May/2026 17:59:48] "GET / HTTP/1.1" 200 -
+220.196.160.61 - - [20/May/2026 18:42:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 22:08:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 22:14:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 22:27:11] "POST / HTTP/1.1" 405 -
+127.0.0.1 - - [20/May/2026 22:27:23] "POST / HTTP/1.1" 405 -
+127.0.0.1 - - [20/May/2026 22:27:34] "POST / HTTP/1.1" 405 -
+127.0.0.1 - - [20/May/2026 22:39:24] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2026 22:53:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 03:39:07] "GET /robots.txt HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 03:45:46] "GET /.env HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 04:03:13] "GET /.env HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:13] "GET /.env.bak HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:13] "GET /.env.save HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:14] "GET /.env.local HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:14] "GET /backend/.env HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:14] "GET /test.php HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:14] "GET /admin/.env HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:14] "GET /.git/config HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:15] "GET /config.php HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:15] "GET /config.php.bak HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:15] "GET /config.js HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:16] "GET /aws-config.js HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:17] "GET /aws.config.js HTTP/1.1" 404 -
+127.0.0.1 - - [21/May/2026 04:03:17] "GET /phpinfo.php HTTP/1.1" 404 -
+147.185.133.25 - - [21/May/2026 06:15:33] "GET / HTTP/1.0" 200 -
+147.185.133.25 - - [21/May/2026 06:16:40] code 400, message Bad request version ('\x00/\x00')
+147.185.133.25 - - [21/May/2026 06:16:40] "\x16\x03\x00\x00i\x01\x00\x00e\x03\x03U\x1c§ärandom1random2random3random4\x00\x00\x0c\x00/\x00" 400 -
+147.185.133.25 - - [21/May/2026 06:17:05] code 400, message Bad request version ('\x00/\x00')
+147.185.133.25 - - [21/May/2026 06:17:05] "\x16\x03\x00\x00i\x01\x00\x00e\x03\x03U\x1c§ärandom1random2random3random4\x00\x00\x0c\x00/\x00" 400 -
+127.0.0.1 - - [21/May/2026 09:39:22] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 09:39:23] "POST /report/html HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 13:15:12] "HEAD / HTTP/1.1" 200 -
+79.124.59.86 - - [21/May/2026 14:02:45] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [21/May/2026 14:02:45] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [21/May/2026 17:07:18] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2026 17:07:20] "POST / HTTP/1.1" 405 -
+127.0.0.1 - - [21/May/2026 20:44:42] "GET / HTTP/1.1" 200 -
+79.124.59.86 - - [21/May/2026 22:32:23] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [21/May/2026 22:32:23] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [21/May/2026 23:00:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 01:31:57] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 02:01:33] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 02:01:34] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 03:59:42] "GET /robots.txt HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 06:04:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:09:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:09:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:11:17] "GET /slot-preview/01.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:11:34] "GET /slot-preview/02.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:11:50] "GET /slot-preview/03.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:12:07] "GET /slot-preview/04.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:12:24] "GET /slot-preview/05.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:13:01] "GET /slot-preview/06.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:13:17] "GET /slot-preview/07.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:13:58] "GET /slot-preview/08.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:14:08] "GET /slot-preview/09.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:14:21] "GET /slot-preview/10.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:14:39] "GET /slot-preview/11.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:14:51] "GET /slot-preview/12.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:15:03] "GET /slot-preview/13.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:15:23] "GET /slot-preview/14.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:15:41] "GET /slot-preview/15.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:16:01] "GET /slot-preview/16.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:16:18] "GET /slot-preview/17.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:16:37] "GET /slot-preview/18.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:16:49] "GET /slot-preview/19.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:17:04] "GET /slot-preview/20.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:17:30] "GET /slot-preview/21.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:17:55] "GET /slot-preview/22.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:18:10] "GET /slot-preview/23.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:18:20] "GET /slot-preview/24.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:18:50] "GET /slot-preview/25.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:20:51] "POST /report/pdf HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:20:55] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:22:38] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:24:09] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:25:05] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 12:52:43] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 12:52:45] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 12:52:50] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 12:58:10] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 12:58:16] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 13:01:48] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 13:01:53] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 13:01:56] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 13:02:19] "GET /report/pdf/20260522-LFMKN5BF7S3736554 HTTP/1.1" 404 -
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+ * Detected change in '/home/ubuntu/car-pdf/app.py', reloading
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 123-923-437
+79.124.59.86 - - [22/May/2026 14:14:37] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [22/May/2026 14:14:37] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+
+  车辆PDF模板工具 - Web版
+  ─────────────────────
+  打开浏览器: http://localhost:8877
+  按 Ctrl+C 停止
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8877
+ * Running on http://172.19.32.3:8877
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 914-348-393
+127.0.0.1 - - [22/May/2026 20:43:55] "GET /.git/config HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 20:43:56] "GET /.env HTTP/1.1" 404 -
+127.0.0.1 - - [22/May/2026 22:27:43] "GET /.env HTTP/1.1" 404 -
+79.124.59.86 - - [22/May/2026 22:58:54] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [22/May/2026 22:58:54] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [22/May/2026 23:09:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/May/2026 23:09:31] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [23/May/2026 00:05:27] "GET / HTTP/1.1" 200 -
+91.227.114.191 - - [23/May/2026 01:21:57] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+91.227.114.191 - - [23/May/2026 01:21:57] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [23/May/2026 02:50:33] "GET / HTTP/1.1" 200 -
+5.61.209.224 - - [23/May/2026 03:24:43] "GET /..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd HTTP/1.1" 404 -
+66.175.213.4 - - [23/May/2026 04:05:01] "GET / HTTP/1.1" 200 -
+59.83.208.104 - - [23/May/2026 04:16:55] "GET / HTTP/1.1" 200 -
+160.119.76.63 - - [23/May/2026 04:58:37] code 400, message Bad request syntax ('\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00')
+160.119.76.63 - - [23/May/2026 04:58:37] "\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00" 400 -
+160.119.76.63 - - [23/May/2026 07:37:02] code 400, message Bad request syntax ('\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00')
+160.119.76.63 - - [23/May/2026 07:37:02] "\x03\x00\x00\x13\x0eà\x00\x00\x00\x00\x00\x01\x00\x08\x00\x02\x00\x00\x00" 400 -
+79.124.59.86 - - [23/May/2026 13:19:54] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [23/May/2026 13:19:54] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+79.124.59.86 - - [23/May/2026 14:26:40] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [23/May/2026 14:26:40] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+127.0.0.1 - - [23/May/2026 15:13:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/May/2026 15:13:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/May/2026 18:06:35] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/May/2026 18:06:37] "POST / HTTP/1.1" 405 -
+35.203.211.20 - - [23/May/2026 22:20:20] "GET / HTTP/1.0" 200 -
+35.203.211.20 - - [23/May/2026 22:20:29] "GET / HTTP/1.1" 200 -
+35.203.211.20 - - [23/May/2026 22:21:28] code 400, message Bad request version ('\x00/\x00')
+35.203.211.20 - - [23/May/2026 22:21:28] "\x16\x03\x00\x00i\x01\x00\x00e\x03\x03U\x1c§ärandom1random2random3random4\x00\x00\x0c\x00/\x00" 400 -
+127.0.0.1 - - [23/May/2026 23:06:36] "GET / HTTP/1.1" 200 -
+185.247.137.119 - - [23/May/2026 23:11:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [23/May/2026 23:14:45] "GET / HTTP/1.1" 200 -
+185.247.137.23 - - [24/May/2026 00:00:49] "GET / HTTP/1.1" 200 -
+180.101.244.13 - - [24/May/2026 00:05:08] "GET / HTTP/1.1" 200 -
+162.216.149.82 - - [24/May/2026 01:52:30] "GET / HTTP/1.0" 200 -
+162.216.149.82 - - [24/May/2026 01:52:40] "GET / HTTP/1.1" 200 -
+79.124.59.86 - - [24/May/2026 02:16:06] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+79.124.59.86 - - [24/May/2026 02:16:06] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -
+80.66.83.80 - - [24/May/2026 04:57:56] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie:')
+80.66.83.80 - - [24/May/2026 04:57:56] "\x03\x00\x00/*à\x00\x00\x00\x00\x00Cookie: mstshash=Administr" 400 -

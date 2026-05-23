@@ -7,7 +7,7 @@ import fitz
 import os
 import sys
 
-PDF = sys.argv[1] if len(sys.argv) > 1 else "authfile1852026011497984810(1).pdf"
+PDF = sys.argv[1] if len(sys.argv) > 1 else "template_decrypted.pdf"
 OUT_DIR = "extracted_images"
 os.makedirs(OUT_DIR, exist_ok=True)
 

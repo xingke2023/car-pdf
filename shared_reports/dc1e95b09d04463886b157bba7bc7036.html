@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>检测认证评估报告 · </title>
+<style>
+/* ── 全局 ─────────────────────────────────────── */
+:root{
+  --navy:#1a3a6b; --navy-light:#2a5298; --blue-muted:#8c9ebe;
+  --line:#cccccc;  --bg-card:#f8f3f1;   --bg-gray:#f9f9f9;
+  --ok:#27ae60;    --limited:#e67e22;   --abnormal:#e74c3c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#e8e8e8;font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;font-size:8.5pt;color:#111}
+
+/* ── A4 页面 ──────────────────────────────────── */
+.page{
+  width:210mm; min-height:297mm; background:white;
+  margin:0 auto 16px; position:relative;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+@page{size:A4;margin:0}
+@media print{
+  body{background:white;margin:0}
+  .page{margin:0;box-shadow:none;page-break-after:always;page-break-inside:avoid}
+  .page:last-child{page-break-after:auto}
+  .no-print{display:none!important}
+  .print-spacer{display:none!important}
+}
+
+/* ── 打印工具栏 ───────────────────────────────── */
+.print-bar{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:var(--navy);color:white;
+  padding:9px 24px;display:flex;align-items:center;gap:14px;
+  font-size:13px;
+}
+.print-bar span{opacity:.8;font-size:12px}
+.print-bar .print-actions{margin-left:auto;display:flex;gap:8px}
+.print-bar button{
+  background:white;color:var(--navy);
+  border:none;padding:6px 20px;border-radius:5px;
+  font-weight:700;cursor:pointer;font-size:13px;
+}
+.print-bar button.btn-share{background:#ffd54d;color:#3a2c00}
+.print-bar button:hover{opacity:.9}
+.print-spacer{height:44px}
+
+/* ── 分享弹窗 ─────────────────────────────────── */
+.share-mask{
+  display:none;position:fixed;inset:0;z-index:10000;
+  background:rgba(0,0,0,.55);
+  align-items:center;justify-content:center;
+}
+.share-mask.open{display:flex}
+.share-panel{
+  background:white;border-radius:10px;width:340px;max-width:92vw;
+  padding:22px 22px 18px;box-shadow:0 12px 40px rgba(0,0,0,.25);
+  font-family:inherit;color:#222;
+}
+.share-panel h3{font-size:16px;color:var(--navy);margin-bottom:14px;text-align:center}
+.share-qr{display:flex;justify-content:center;margin:6px 0 14px}
+.share-qr canvas,.share-qr img{display:block;border:1px solid #eee;padding:6px;background:white}
+.share-qr-tip{text-align:center;font-size:12px;color:#888;margin-bottom:14px}
+.share-link{
+  display:flex;border:1px solid #ddd;border-radius:6px;overflow:hidden;
+  font-size:12px;margin-bottom:14px;
+}
+.share-link input{
+  flex:1;border:none;outline:none;padding:8px 10px;font-size:12px;
+  background:#fafafa;color:#333;min-width:0;font-family:inherit;
+}
+.share-link button{
+  border:none;background:var(--navy);color:white;
+  padding:0 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;
+}
+.share-link button.copied{background:var(--ok)}
+.share-close{
+  display:block;margin:0 auto;border:1px solid #ddd;background:white;
+  padding:7px 30px;border-radius:5px;font-size:13px;cursor:pointer;color:#555;
+}
+.share-close:hover{background:#f5f5f5}
+
+/* ── 页眉页脚共用 ─────────────────────────────── */
+.pg-header{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:flex-end;align-items:center;
+  padding:36px 15px 6px;font-size:6.5pt;color:#888;
+  background:white;z-index:2;
+}
+.pg-footer{
+  position:absolute;bottom:0;left:0;right:0;
+  text-align:center;font-size:6.5pt;color:#888;
+  padding:20px 4px;
+}
+.page-body{padding:40px 18mm 30px}
+
+/* ── 页1 封面（浅色调）─────────────────────────── */
+#p1{background:#e3e9f2;padding:0;overflow:hidden;border-top:6px solid var(--navy)}
+/* 右上角斜切装饰块 */
+#p1::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:260px;height:260px;background:rgba(26,58,107,.04);
+  transform:rotate(30deg);border-radius:12px;
+}
+#p1::after{
+  content:'';position:absolute;top:20px;right:20px;
+  width:160px;height:160px;background:rgba(26,58,107,.03);
+  transform:rotate(18deg);border-radius:8px;
+}
+/* 顶部品牌：国际检 居中放大 */
+.cover-logo-bar{
+  position:absolute;top:90px;left:0;right:0;
+  display:flex;flex-direction:column;align-items:center;
+  padding:0;
+}
+.cover-logo-text{
+  color:var(--navy);font-size:72pt;font-weight:800;
+  letter-spacing:14px;text-indent:14px;
+  margin:0;line-height:1;
+}
+.cover-report-no{
+  position:absolute;top:32px;right:28px;
+  color:#888;font-size:9pt;letter-spacing:.5px;
+}
+/* 左侧竖条 */
+.cover-left-bar{
+  position:absolute;left:0;top:0;bottom:0;width:5px;
+  background:linear-gradient(180deg,#4a90d9 0%,#1a5fb4 50%,transparent 100%);
+}
+/* 主标题区 */
+.cover-main{
+  position:absolute;top:54%;left:0;right:0;
+  transform:translateY(-50%);
+  padding:0 36px;
+}
+.cover-tag{
+  display:block;width:fit-content;background:rgba(74,144,217,.12);
+  border:1px solid rgba(74,144,217,.35);
+  color:#2a5298;font-size:6.5pt;letter-spacing:3px;
+  padding:4px 12px;border-radius:2px;margin:0 auto 18px;
+}
+.cover-title{
+  color:var(--navy);font-size:42pt;font-weight:900;
+  line-height:1.05;letter-spacing:3px;margin-bottom:6px;
+  text-align:center;white-space:nowrap;
+}
+.cover-title span{color:#4a90d9}
+.cover-en{
+  color:#9aa6bd;font-size:7pt;
+  letter-spacing:2px;margin-bottom:28px;
+  text-align:center;
+}
+.cover-divider{
+  width:48px;height:3px;margin:0 auto 24px;
+  background:linear-gradient(90deg,#4a90d9,transparent);
+  border:none;
+}
+.cover-info-row{display:flex;gap:28px;margin-bottom:8px;justify-content:center}
+.cover-info-item{}
+.cover-info-label{color:#9aa6bd;font-size:6pt;letter-spacing:1px;margin-bottom:3px}
+.cover-info-value{color:#333;font-size:13pt;font-weight:600;white-space:nowrap}
+.cover-info-date .cover-info-label{font-size:10pt}
+/* 底部公司栏 */
+.cover-footer{
+  position:absolute;bottom:120px;left:0;right:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:14px 36px;
+}
+.cover-company{color:#555;font-size:17pt;font-weight:400;white-space:nowrap}
+.cover-company-sub{display:none}
+.cover-page-no{display:none}
+/* 右下角装饰圆 */
+.cover-circle1{
+  position:absolute;bottom:60px;right:-40px;
+  width:200px;height:200px;border-radius:50%;
+  border:1px solid rgba(74,144,217,.20);
+}
+.cover-circle2{
+  position:absolute;bottom:30px;right:-80px;
+  width:280px;height:280px;border-radius:50%;
+  border:1px solid rgba(74,144,217,.12);
+}
+
+/* ── 页2 摘要 ─────────────────────────────────── */
+.report-title{text-align:center;font-size:22pt;font-weight:400;color:var(--navy);margin-bottom:26px}
+.info-grid{width:100%;border-collapse:collapse;margin-bottom:24px}
+.info-grid td{border:1px solid var(--line);padding:9px 10px;font-size:9.5pt;vertical-align:middle}
+.info-grid .lbl{color:#555;width:80px;background:#fafafa}
+.result-box{background:var(--bg-card);border:1px solid #ddd;border-radius:4px;padding:18px 10px;margin-bottom:22px}
+.result-box-title{text-align:center;font-size:17pt;font-weight:400;color:var(--navy);margin-bottom:14px}
+.result-badges{display:flex;justify-content:space-around;gap:8px}
+.badge{flex:1;text-align:center;padding:14px 6px;border-radius:4px}
+.badge.pass{background:rgba(39,174,96,.1);border:1px solid rgba(39,174,96,.35)}
+.badge.fail{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.35)}
+.badge-icon{font-size:22pt;margin-bottom:4px}
+.badge.pass .badge-icon{color:var(--ok)}
+.badge.fail .badge-icon{color:var(--abnormal)}
+.badge-label{font-size:10pt;font-weight:700;color:#333}
+.badge.pass .badge-verdict{color:var(--ok);font-size:9pt;font-weight:700;margin-top:2px}
+.badge.fail .badge-verdict{color:var(--abnormal);font-size:9pt;font-weight:700;margin-top:2px}
+.decl-box{background:var(--bg-card);border:1px solid #ddd;border-radius:4px;padding:14px;margin-bottom:18px}
+.decl-box-title{font-size:17pt;font-weight:400;color:var(--navy);text-align:center;margin-bottom:10px}
+.decl-text{font-size:8.5pt;color:#444;line-height:1.8}
+.footer-info{font-size:8.5pt;color:#555;line-height:2.2;margin-bottom:8px}
+.time-row{display:flex;justify-content:space-between;font-size:8.5pt;color:#555;margin-bottom:14px}
+.seal-area{position:absolute;bottom:50px;left:15mm;z-index:2}
+.seal-area img{width:88px;height:88px;object-fit:contain}
+
+/* ── 页3 详情 ─────────────────────────────────── */
+.section-title{font-size:13pt;font-weight:700;color:var(--navy);margin-bottom:14px;padding-bottom:4px;border-bottom:2px solid var(--navy)}
+.car-model-box{background:var(--bg-gray);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin-bottom:20px;font-size:8.5pt;line-height:1.8;color:#333}
+.detail-grid{width:100%;border-collapse:collapse;margin-bottom:22px}
+.detail-grid td{border:1px solid var(--line);padding:9px 10px;font-size:8.5pt;vertical-align:middle}
+.detail-grid .lbl{color:#555;width:80px;background:#fafafa;font-weight:600}
+.check-count-row{display:flex;gap:10px;margin-bottom:20px}
+.count-badge{flex:1;text-align:center;background:var(--navy);color:white;border-radius:5px;padding:12px 6px}
+.count-badge .num{font-size:18pt;font-weight:900}
+.count-badge .lbl{font-size:7pt;opacity:.85;margin-top:2px}
+.notes-box{background:var(--bg-gray);border:1px solid var(--line);border-radius:4px;padding:12px 14px;margin-bottom:20px;min-height:60px;font-size:8pt;color:#444;line-height:1.8}
+.sign-row{display:flex;align-items:center;gap:20px;font-size:8pt;color:#555}
+.sign-line{flex:1;border-bottom:1px solid var(--line);margin-top:20px}
+
+/* ── 照片页 ─────────────────────────────────────── */
+.photo-page-title{font-size:13pt;font-weight:700;color:var(--navy);margin-bottom:8px}
+.photo-page-sub{font-size:7pt;color:#555;line-height:1.6;margin-bottom:14px}
+.photo-row{display:flex;gap:10px;margin-bottom:6px}
+.photo-slot{flex:1;position:relative;background:#f0f0f0;border:1px solid #ddd;border-radius:3px;overflow:hidden}
+.photo-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-slot .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#bbb;font-size:8pt}
+.photo-slot .ph-num{font-size:16pt;font-weight:900;color:#ccc}
+.photo-label-row{display:flex;gap:10px;margin-bottom:14px}
+.photo-label{flex:1;text-align:center;font-size:8pt;color:#444;padding:3px 0;background:#fafafa;border:1px solid #eee;border-radius:2px}
+
+/* ── 检测项页（紧凑 3 列）─────────────────────── */
+.check-section-header{background:var(--navy);color:white;padding:4px 12px;border-radius:3px 3px 0 0;font-size:9pt;font-weight:700;margin-bottom:0;margin-top:8px}
+.check-section-header:first-child{margin-top:0}
+.check-section-desc{background:#eef2f8;border:1px solid #c8d4e4;border-top:none;padding:5px 12px;font-size:6.5pt;color:#445;line-height:1.5;margin-bottom:5px}
+.check-summary{background:#f5f5f5;border:1px solid var(--line);padding:6px 12px;font-size:7pt;color:#555;margin-bottom:8px;border-radius:2px}
+.check-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-bottom:none;margin-bottom:6px}
+.check-item{display:flex;align-items:center;gap:4px;padding:2.5px 6px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:6.5pt;min-width:0}
+.check-item:nth-child(3n){border-right:none}
+.ci-icon{width:11px;height:11px;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:7pt;font-weight:700}
+.ci-icon.ok{background:rgba(39,174,96,.15);color:var(--ok)}
+.ci-icon.limited{background:rgba(230,126,34,.15);color:var(--limited)}
+.ci-icon.abnormal{background:rgba(231,76,60,.15);color:var(--abnormal)}
+.ci-name{flex:1;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ci-status{font-size:6pt;font-weight:600;flex-shrink:0}
+
+/* ── 填满高度的页面布局 ───────────────────────── */
+.page-body.fill{
+  display:flex;flex-direction:column;
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  padding:70px 18mm 40px;
+}
+.sec-block{display:flex;flex-direction:column;min-height:0}
+.sec-block .check-grid{flex:1 1 auto;grid-auto-rows:minmax(min-content,1fr);margin-bottom:0}
+.disclaimer-block{display:flex;flex-direction:column;min-height:0}
+.disclaimer-block .disclaimer-text{flex:1 1 auto}
+.ci-status.ok{color:var(--ok)}
+.ci-status.limited{color:var(--limited)}
+.ci-status.abnormal{color:var(--abnormal)}
+
+/* ── 免责声明 ──────────────────────────────────── */
+.disclaimer-title{font-size:13pt;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:4px;border-bottom:2px solid var(--navy)}
+.disclaimer-text{font-size:9pt;color:#444;line-height:1.85}
+</style>
+</head>
+<body>
+
+<!-- 打印工具栏 -->
+<div class="print-bar no-print">
+  <strong>检测认证评估报告</strong>
+  <span></span>
+  <div class="print-actions">
+    <button class="btn-share" onclick="openShare()">↗ 转发</button>
+    <button onclick="window.print()">🖨 打印 / 导出PDF</button>
+  </div>
+</div>
+<div class="print-spacer no-print"></div>
+
+<!-- 分享弹窗 -->
+<div class="share-mask no-print" id="shareMask" onclick="if(event.target===this)closeShare()">
+  <div class="share-panel">
+    <h3>转发此份报告</h3>
+    <div class="share-qr" id="shareQr"></div>
+    <div class="share-qr-tip">微信扫码即可在手机上查看 · 链接 7 天内有效</div>
+    <div class="share-link">
+      <input id="shareLink" type="text" readonly>
+      <button id="shareCopyBtn" onclick="copyShareLink()">复制链接</button>
+    </div>
+    <button class="share-close" onclick="closeShare()">关闭</button>
+  </div>
+</div>
+
+
+
+
+<div class="page" id="p1">
+  <div class="cover-left-bar"></div>
+  <div class="cover-circle1"></div>
+  <div class="cover-circle2"></div>
+
+  <div class="cover-logo-bar">
+    <div class="cover-logo-text">国际检</div>
+    <div class="cover-report-no">报告编号：</div>
+  </div>
+
+  <div class="cover-main">
+    <div class="cover-tag">INSPECTION &amp; CERTIFICATION</div>
+    <div class="cover-title">检测认证<span>评估报告</span></div>
+    <div class="cover-en">VEHICLE INSPECTION &amp; CERTIFICATION REPORT</div>
+    
+    
+    <div class="cover-info-row">
+      <div class="cover-info-item cover-info-date">
+        <div class="cover-info-value">2026-05-20</div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="cover-footer">
+    <div>
+      <div class="cover-company">检测评估单位：广州国际检机动车鉴定评估有限公司</div>
+    </div>
+    <div class="cover-page-no">1 / 10</div>
+  </div>
+</div>
+
+
+
+
+<div class="page" id="p2">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body" style="padding-top:70px">
+    <div class="report-title">车辆检测认证报告</div>
+
+    <table class="info-grid">
+      <tr>
+        <td class="lbl">车型名称</td>
+        <td colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="lbl">车辆颜色</td>
+        <td></td>
+        <td class="lbl" style="width:80px">车架号</td>
+        <td></td>
+      </tr>
+    </table>
+
+    <div class="result-box">
+      <div class="result-box-title">检测结果</div>
+      <div style="text-align:center;font-size:22pt;font-weight:700;color:#e74c3c;margin-bottom:12px">S级</div>
+      <div class="result-badges">
+        <div class="badge pass">
+          <div class="badge-icon">✓</div>
+          <div class="badge-label">事故检测</div>
+          <div class="badge-pass-verdict" style="font-size:8pt;font-weight:700;margin-top:3px;color:#27ae60">
+            非重大事故车
+          </div>
+        </div>
+        <div class="badge pass">
+          <div class="badge-icon">✓</div>
+          <div class="badge-label">泡水检测</div>
+          <div style="font-size:8pt;font-weight:700;margin-top:3px;color:#27ae60">
+            非泡水车
+          </div>
+        </div>
+        <div class="badge pass">
+          <div class="badge-icon">✓</div>
+          <div class="badge-label">火烧检测</div>
+          <div style="font-size:8pt;font-weight:700;margin-top:3px;color:#27ae60">
+            非火烧车
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="decl-box">
+      <div class="decl-box-title">检测声明</div>
+      <div class="decl-text">
+        检测标准：本公司检测标准 GB/T-30323-2013 二手车鉴定评估技术规范 + T/CADA18-2021 乘用车鉴定评估技术规范 +
+        国际检检测标准等相关检测标准综合评估而成，检测结果仅代表国际检检测评估结果。最终解释权归国际检所有
+        （广州国际检机动车鉴定评估有限公司）
+      </div>
+    </div>
+
+    <div class="time-row">
+      <span>检测下单：2026-05-20</span>
+      <span>检测完成：2026-05-20</span>
+      <span>出具报告：2026-05-20</span>
+    </div>
+
+    <div style="position:relative;margin-top:80px">
+      <div class="footer-info">
+        检测单位：广州国际检机动车鉴定评估有限公司<br>
+        <span style="margin-right:40px">报告日期：2026-05-20</span><span>客服电话：</span><br>
+        温馨提示：车辆信息仅供参考，实际车型与配置信息请以实车为准，此证书手写无效。
+      </div>
+      
+      <div style="position:absolute;top:-10px;left:100px">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdgAAAHYCAYAAADu2fmZAAAACXBIWXMAAC4jAAAuIwF4pT92AAAiYGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOmZmYzg2ZmVhLWY2YTgtOTc0My04YmEzLTVmNzRmZDYxZWUwZCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2N2UwYjhhYi05ZTdjLWFhNGEtYTllNS1lNjNmMjM4YTVjOTUiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0iMTU0MTg1RkQ2RkE1REZBNjBCNTgyQjY0QThCRDQ2REUiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOC0wMy0xOFQxMzozMDo1OSswODowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDUtMTFUMTE6MzA6MTQrMDg6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDUtMTFUMTE6MzA6MTQrMDg6MDAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB0aWZmOkltYWdlV2lkdGg9IjEwMjQiIHRpZmY6SW1hZ2VMZW5ndGg9IjgwMCIgdGlmZjpQaG90b21ldHJpY0ludGVycHJldGF0aW9uPSIyIiB0aWZmOk9yaWVudGF0aW9uPSIxIiB0aWZmOlNhbXBsZXNQZXJQaXhlbD0iMyIgdGlmZjpYUmVzb2x1dGlvbj0iMzAwMDAwMC8xMDAwMCIgdGlmZjpZUmVzb2x1dGlvbj0iMzAwMDAwMC8xMDAwMCIgdGlmZjpSZXNvbHV0aW9uVW5pdD0iMiIgZXhpZjpFeGlmVmVyc2lvbj0iMDIyMSIgZXhpZjpDb2xvclNwYWNlPSI2NTUzNSIgZXhpZjpQaXhlbFhEaW1lbnNpb249IjQ3MiIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjQ3MiI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImRlcml2ZWQiIHN0RXZ0OnBhcmFtZXRlcnM9ImNvbnZlcnRlZCBmcm9tIGltYWdlL2pwZWcgdG8gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MzA5QkVDQzA3MTJBRTgxMThCMUFDMkE4NUQyNTRFMzciIHN0RXZ0OndoZW49IjIwMTgtMDMtMThUMTQ6MDE6MDkrMDg6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowN0VGOTk1MUZENUZFOTExOTVFMkMxRDhDNTMyQzQ2NCIgc3RFdnQ6d2hlbj0iMjAxOS0wNC0xNlQxMjowOTo1MyswODowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL2pwZWciLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImRlcml2ZWQiIHN0RXZ0OnBhcmFtZXRlcnM9ImNvbnZlcnRlZCBmcm9tIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AgdG8gaW1hZ2UvanBlZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MDhFRjk5NTFGRDVGRTkxMTk1RTJDMUQ4QzUzMkM0NjQiIHN0RXZ0OndoZW49IjIwMTktMDQtMTZUMTI6MDk6NTMrMDg6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJkZXJpdmVkIiBzdEV2dDpwYXJhbWV0ZXJzPSJjb252ZXJ0ZWQgZnJvbSBpbWFnZS9qcGVnIHRvIGFwcGxpY2F0aW9uL3ZuZC5hZG9iZS5waG90b3Nob3AiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5RUY5OTUxRkQ1RkU5MTE5NUUyQzFEOEM1MzJDNDY0IiBzdEV2dDp3aGVuPSIyMDE5LTA0LTE2VDEyOjA5OjU1KzA4OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NzNhMThhMjItOTgwYS00YTQ0LWFkMmUtZDQ5ZjNlYTgyMjZkIiBzdEV2dDp3aGVuPSIyMDI2LTA1LTExVDExOjMwOjE0KzA4OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOSAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iZGVyaXZlZCIgc3RFdnQ6cGFyYW1ldGVycz0iY29udmVydGVkIGZyb20gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCB0byBpbWFnZS9wbmciLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjY3ZTBiOGFiLTllN2MtYWE0YS1hOWU1LWU2M2YyMzhhNWM5NSIgc3RFdnQ6d2hlbj0iMjAyNi0wNS0xMVQxMTozMDoxNCswODowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3M2ExOGEyMi05ODBhLTRhNDQtYWQyZS1kNDlmM2VhODIyNmQiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo1MjViMTg5Ni03YjJiLTRkNGQtYjhhNS0yZDBkYWM4MWI4OWQiIHN0UmVmOm9yaWdpbmFsRG9jdW1lbnRJRD0iMTU0MTg1RkQ2RkE1REZBNjBCNTgyQjY0QThCRDQ2REUiLz4gPHBob3Rvc2hvcDpUZXh0TGF5ZXJzPiA8cmRmOkJhZz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSIzNjA1MDIyMTA0MTIyNCIgcGhvdG9zaG9wOkxheWVyVGV4dD0iMzYwNTAyMjEwNDEyMjQiLz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSLmlrDkvZnluILnoqfmt7znvZHnu5znp5HmioDmnInpmZDlhazlj7giIHBob3Rvc2hvcDpMYXllclRleHQ9IuaWsOS9meW4gueip+a3vOe9kee7nOenkeaKgOaciemZkOWFrOWPuCIvPiA8cmRmOmxpIHBob3Rvc2hvcDpMYXllck5hbWU9IuWQiOWQjOS4k+eUqOeroCIgcGhvdG9zaG9wOkxheWVyVGV4dD0i5ZCI5ZCM5LiT55So56ugIi8+IDxyZGY6bGkgcGhvdG9zaG9wOkxheWVyTmFtZT0iMzYwNTAyMjEwNTIwMzQiIHBob3Rvc2hvcDpMYXllclRleHQ9IjM2MDUwMjIxMDUyMDM0Ii8+IDxyZGY6bGkgcGhvdG9zaG9wOkxheWVyTmFtZT0i5paw5L2Z5biC5qWa5rO9572R57uc56eR5oqA5pyJ6ZmQ5YWs5Y+4IiBwaG90b3Nob3A6TGF5ZXJUZXh0PSLmlrDkvZnluILmpZrms73nvZHnu5znp5HmioDmnInpmZDlhazlj7giLz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSLlkIjlkIzkuJPnlKjnq6AiIHBob3Rvc2hvcDpMYXllclRleHQ9IuWQiOWQjOS4k+eUqOeroCIvPiA8cmRmOmxpIHBob3Rvc2hvcDpMYXllck5hbWU9IjExMDEwNTAyMDY1NjkiIHBob3Rvc2hvcDpMYXllclRleHQ9IjExMDEwNTAyMDY1NjkiLz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSLmrabmsYnnsr7oh6PmmbrmhafmoIfor4bnp5HmioDmnInpmZDlhazlj7giIHBob3Rvc2hvcDpMYXllclRleHQ9IuatpuaxieeyvuiHo+aZuuaFp+agh+ivhuenkeaKgOaciemZkOWFrOWPuCIvPiA8cmRmOmxpIHBob3Rvc2hvcDpMYXllck5hbWU9IuWQiOWQjOS4k+eUqOeroCIgcGhvdG9zaG9wOkxheWVyVGV4dD0i5ZCI5ZCM5LiT55So56ugIi8+IDxyZGY6bGkgcGhvdG9zaG9wOkxheWVyTmFtZT0iMzcwMTEyNzgyNTI2NiIgcGhvdG9zaG9wOkxheWVyVGV4dD0iMzcwMTEyNzgyNTI2NiIvPiA8cmRmOmxpIHBob3Rvc2hvcDpMYXllck5hbWU9IuS9m+WxseW4guWco+azveaZuuiBlOijheWkh+aciemZkOWFrOWPuCIgcGhvdG9zaG9wOkxheWVyVGV4dD0i5L2b5bGx5biC5Zyj5rO95pm66IGU6KOF5aSH5pyJ6ZmQ5YWs5Y+4Ii8+IDxyZGY6bGkgcGhvdG9zaG9wOkxheWVyTmFtZT0i5bm/5bee5LiH6aqP5py65Yqo6L2m6Ym05a6a6K+E5Lyw5pyJ6ZmQ5YWs5Y+4IiBwaG90b3Nob3A6TGF5ZXJUZXh0PSLlub/lt57kuIfpqo/mnLrliqjovabpibTlrpror4TkvLDmnInpmZDlhazlj7giLz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSLlkIjlkIzkuJPnlKjnq6AiIHBob3Rvc2hvcDpMYXllclRleHQ9IuWQiOWQjOS4k+eUqOeroCIvPiA8cmRmOmxpIHBob3Rvc2hvcDpMYXllck5hbWU9IjQ0MDExMTE5MzU0NDMiIHBob3Rvc2hvcDpMYXllclRleHQ9IjQ0MDExMTE5MzU0NDMiLz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSLlub/lt57luJXmi4nmlq/mnLrmorDnp5HmioDmnInpmZDlhazlj7giIHBob3Rvc2hvcDpMYXllclRleHQ9IuW5v+W3nuW4leaLieaWr+acuuaisOenkeaKgOaciemZkOWFrOWPuCIvPiA8cmRmOmxpIHBob3Rvc2hvcDpMYXllck5hbWU9IuWxheawkeWnlOWRmOS8miIgcGhvdG9zaG9wOkxheWVyVGV4dD0i5bGF5rCR5aeU5ZGY5LyaIi8+IDwvcmRmOkJhZz4gPC9waG90b3Nob3A6VGV4dExheWVycz4gPHBob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4gPHJkZjpCYWc+IDxyZGY6bGk+MDE4QUQ0N0I0M0I5RUFBOTg2MUFGQzEwMjNDMTZBMTk8L3JkZjpsaT4gPHJkZjpsaT4wMjg2OTEyQjAwNjA5QTBCNEI5MDdEQUVGRkMxQTJFMzwvcmRmOmxpPiA8cmRmOmxpPjA2NzQ2RkQyRDYxN0IxMjY3NDZCM0IxOUMzRjFCNTI2PC9yZGY6bGk+IDxyZGY6bGk+MEQ5QTI1NEE1MUMyNDRBRDkwOEM2M0I1OTdGMEM3Njk8L3JkZjpsaT4gPHJkZjpsaT4xMDIyRjIyNzQ5OTZENzlGQjQ5RDFDNzM5MkUyOUIzQzwvcmRmOmxpPiA8cmRmOmxpPjE1NDE4NUZENkZBNURGQTYwQjU4MkI2NEE4QkQ0NkRFPC9yZGY6bGk+IDxyZGY6bGk+MTk4RjlEMjhBMEE4M0VERjhCNTgzODgzREUwMEZBOUM8L3JkZjpsaT4gPHJkZjpsaT4xQUUxMjJENUE3NUJEOEU3QTk4QjM2QjhENzkzQjRBNTwvcmRmOmxpPiA8cmRmOmxpPjFGQ0IwQjhBNjdBMjBGOTRDNTEzMzk2NTgzMENBQjhCPC9yZGY6bGk+IDxyZGY6bGk+MjA1REM2NDZDQTY3ODQ5NzExMDM3M0EzOUJBRDI5MzQ8L3JkZjpsaT4gPHJkZjpsaT4yNDNGNERGM0I2QUUyMkQ4Njc4QTc3RjlDMTg0MzVCNjwvcmRmOmxpPiA8cmRmOmxpPjI3NEMzNTE5OUMzOEUyRTNCRTZDREJFODk2RjlENDgwPC9yZGY6bGk+IDxyZGY6bGk+MzYzNzE3QTkwMUFCRDRFNjUxNDUxRjNGMDY0MTQyQzc8L3JkZjpsaT4gPHJkZjpsaT4zOTQ0MTk2Q0E1QUIwQTU3ODRCMEVEMUZBQURERjg2MzwvcmRmOmxpPiA8cmRmOmxpPjNBQ0NDREEyQTk2MDNGODg4NDM4NEFBNjdCREQ5ODBBPC9yZGY6bGk+IDxyZGY6bGk+M0NCMDY2NEI1MkZBNTg0OEE3MDc3MURCODcyRUIxMzA8L3JkZjpsaT4gPHJkZjpsaT4zRUNEMUM5MzQ3Q0E5MzIxRDY4QjBGMDg5Mzg0MEUyNzwvcmRmOmxpPiA8cmRmOmxpPjNFRDc4QTZEN0U2MkJBQzNEQzkzNEQ0ODM2N0ZDQkE3PC9yZGY6bGk+IDxyZGY6bGk+NDU5NTA4NkIxNTA3RjAwQzdGNEUwMzE3ODM4MTQ0NzI8L3JkZjpsaT4gPHJkZjpsaT40QkY0OUJBRjA5Njg3RkUwOUM2RDUwNDJDMkFFMDdCQzwvcmRmOmxpPiA8cmRmOmxpPjUzRUJGRTI0NEYxMzIwOEFERDU0RjMzQTQwM0EyMjlCPC9yZGY6bGk+IDxyZGY6bGk+NTNGRTQwNjk4OTY4OUUxRThDQTkwNkQ2NEFFN0M0Mzc8L3JkZjpsaT4gPHJkZjpsaT41N0Q0M0YzMDkwQzEyMjRENzk3RDc5Q0Q0QjVEN0I2RjwvcmRmOmxpPiA8cmRmOmxpPjVGOUQ0MjI5NDZFREIwQUMxQTg3NDJFNjgyQzRGRDk4PC9yZGY6bGk+IDxyZGY6bGk+NjI4MjMwMzM0QzQzMUJEREMyN0VBNzY4MjFEOEMzODc8L3JkZjpsaT4gPHJkZjpsaT42NUJEQTFFNjVFMkRCRTc2MjY0RTczQzFCRjA0OERFMzwvcmRmOmxpPiA8cmRmOmxpPjY3NThBRkJCQzUzRjQzNURDNkM3NTdFNDM2MjNFQjBBPC9yZGY6bGk+IDxyZGY6bGk+NkQzREM3QkY5OTQzMTIyQzE2RDRGQzg4MkMwN0FGOUU8L3JkZjpsaT4gPHJkZjpsaT42REIxNDFEMzBBRUVBMDc3RDFEM0ZFMDYzNjRBNDVFOTwvcmRmOmxpPiA8cmRmOmxpPjZGNzJENEFBQjVEQjNCRUYwOEU1QjEyNDkzMENCNjc5PC9yZGY6bGk+IDxyZGY6bGk+NkY4QTAzRkU3QkFFQTk3M0M2NjBERUUwMUEyM0JERjk8L3JkZjpsaT4gPHJkZjpsaT43ODMxMjk5OUVFQzRDODJFNkUwRkNCNjAzMUQ4M0E4QTwvcmRmOmxpPiA8cmRmOmxpPjdENjFEOUUzN0Q1OTNBMkIwNjg3MThBQTI1MDZGQTk0PC9yZGY6bGk+IDxyZGY6bGk+N0ZBOTBBMzcwNkM2RTZGOEMyRENEQzE2QjJFMzcwQkM8L3JkZjpsaT4gPHJkZjpsaT43RkYzMjQ1NDEwRDQ1OTM4NjgzODNEMTQ1NkQwQkRBQjwvcmRmOmxpPiA8cmRmOmxpPjgzREY5RTg1MkUzRjczM0U4RjdDNjMxN0E5MEQ2NkVEPC9yZGY6bGk+IDxyZGY6bGk+ODZGMTQxNEY4RDQwM0FDQUM4NjAxRUFEMjdCQjYyREQ8L3JkZjpsaT4gPHJkZjpsaT44QUUxNzc4RTFDNzk2MTgwNTUzM0REOUEzOURGN0RGNTwvcmRmOmxpPiA8cmRmOmxpPjhDNzkxRjQ0M0EzREE5NUE5NDk4NDZDNUM1MTdENEYxPC9yZGY6bGk+IDxyZGY6bGk+OEQ1NjZGNEM4RTg4MzlCQjUwOTMxREVFMUMzQjdENzA8L3JkZjpsaT4gPHJkZjpsaT44RTc2OTBGOEZBQTBDMTc1MEU2QjJGMTczOEFEQzlENzwvcmRmOmxpPiA8cmRmOmxpPjkyMjczMDFFQTUxQjQ1NjlENUUyRjcwMTcwRDVDRjAxPC9yZGY6bGk+IDxyZGY6bGk+OTYzQjMwMURDOTVCQjBFQUY4NTE3MDMxRjQ1MTk1Nzg8L3JkZjpsaT4gPHJkZjpsaT45QTYyMDQ3MTdBODE5MkQyOEFCRkU1MEFGQzFEQUU3OTwvcmRmOmxpPiA8cmRmOmxpPkEzM0Q5QTZEM0QwRkNEODM3N0FENkYyODEyQ0RDNkU1PC9yZGY6bGk+IDxyZGY6bGk+QTM1RjkzODQ3ODAwMEU2NjZCRjVGMTM2NzlERDZDOTA8L3JkZjpsaT4gPHJkZjpsaT5CQjk4RjAyNTA2M0NBMjhGODJBOUI1RkQwNDg3RjIyQTwvcmRmOmxpPiA8cmRmOmxpPkJEMzYwODA4MUI5ODgyNUYxMEMzRTI2RTA2MjhFQ0VBPC9yZGY6bGk+IDxyZGY6bGk+QkY0MzFFMTlFODdCQUJBQzM4MUIxNTU2ODREM0EwMTM8L3JkZjpsaT4gPHJkZjpsaT5DM0UwRDZGNjhDMEY2QzVGQTNDNTdGRjk3QkJFM0Y2QjwvcmRmOmxpPiA8cmRmOmxpPkM2OUM1ODA1NzY0MjZBRkVERTJBRjAyQzUwMDdBNUVBPC9yZGY6bGk+IDxyZGY6bGk+QzdFOTQ5NDMxRDg3MDRFMTgyODIyQ0I3MDY1NURGRTc8L3JkZjpsaT4gPHJkZjpsaT5ENjM4OURCQjU5QjBBNzEwRTdFNzA0QTVCQUMyMUVCMTwvcmRmOmxpPiA8cmRmOmxpPkRBMTIzNTIyMjNCRkZFMDg0MzE0RDE1OUNC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" alt="公章" style="width:88px;height:88px;object-fit:contain">
+      </div>
+      
+    </div>
+
+  </div>
+
+  <div class="pg-footer">2 / 10</div>
+</div>
+
+
+
+
+<div class="page" id="p3">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body" style="padding-top:70px">
+
+    <div class="section-title">车型核实</div>
+    <div class="car-model-box">
+      与第三方车型库参数对比后，判定此车大概率为：<strong></strong>
+    </div>
+
+    <div class="section-title">基本信息</div>
+    <table class="detail-grid">
+      <tr>
+        <td class="lbl">初登日期</td><td></td>
+        <td class="lbl">表显里程</td><td></td>
+      </tr>
+      <tr>
+        <td class="lbl">VIN</td><td></td>
+        <td class="lbl">能源类型</td><td></td>
+      </tr>
+      <tr>
+        <td class="lbl">排量</td><td></td>
+        <td class="lbl">车辆性质</td><td>非营运</td>
+      </tr>
+    </table>
+
+    <div class="section-title">检测项目</div>
+    <div class="check-count-row">
+      
+      <div class="count-badge">
+        <div class="num">63</div>
+        <div class="lbl">事故检测</div>
+      </div>
+      
+      <div class="count-badge">
+        <div class="num">29</div>
+        <div class="lbl">泡水检测</div>
+      </div>
+      
+      <div class="count-badge">
+        <div class="num">23</div>
+        <div class="lbl">火烧检测</div>
+      </div>
+      
+      <div class="count-badge">
+        <div class="num">52</div>
+        <div class="lbl">车身外观检测</div>
+      </div>
+      
+      <div class="count-badge">
+        <div class="num">7</div>
+        <div class="lbl">记录模块</div>
+      </div>
+      
+    </div>
+
+    <div class="section-title">评估师备注</div>
+    <div class="notes-box"></div>
+
+    <div class="section-title">评估师签名</div>
+    <div class="sign-row">
+      <span>签名：</span>
+      
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzIAAAEmCAYAAAC57aWJAABZeklEQVR4nO3defxtU/3H8dc1xTJGmUpkLlKIlFaDKFKZI0OICBUJkVWJRVLIkKmBSIaMFSoZlyg/EgqJUJnnaRku9/7+WPvm6/oOZ8/7nPN+Ph7fB87Ze+0P7vec/dlrrc8HRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERESkb0xqOwARERERkS4w1s0KzAEsBMwNzAxE4DHgnhj8iy2GJ9NRIiMiIiIiQ8tY9y1gS2BRUuIylpeBfwJXA78FLorBP1N/hDIWJTIiIiIiMrSMdf8GFilw6nPAmcDRMfjrqo1KejFD2wGIiIiIiLToooLnzQZsDfyfse5CY927qgtJeqEZGREREREZasa6RYBVs5/3A+8GZsk5zBTgR8DXYvBPVhuhjEaJjIiIiIjICNmm//cDawKfBN6e4/R7ga1i8JfVEZu8QomMiIiIiMg4jHXLAJ8Ftgfm7+GUl4GvxuCPqDWwIadERkRERESkB9lMze7Afoxf4WyafWPwB9Ua1BBTIiMiIiIikoOxbi3gV8CsPRy+cQz+7JpDGkpKZEREREREcjLWnQF8uodDHwGWiME/VXNIQ2emtgMQEZHyjHW7AjMC58Xg/9V2PCIiQ2DFHo97A7AdcHiNsQwl9ZERERkM8wOHAnca664x1u1orJur7aBERAZR9vm6ZI5TPlFXLMNMiYyIyGAYWeZzNeA44H5j3Q+NdfO0E5KIyMBamXxbNFaqK5BhpkRGRGQwBODp6V4zwM7Arca6jZoPSURkYL075/HzGOt6KdssOSiREREZADH4F4DfjPH2gsBZxrofGOu0N1JEpLzVCpwzd+VRDDklMiIig+MXE7y/K3CxsU5fpiIiBRnrZgTWKHJq1bEMOyUyIiKD47fAAxMc8yHgEmPdvPWHIyIykFYF5ilwXqw4jqGnJQZSmLHuTcDbgWWARUnlBWdl7M1vzwP3Zj93AbcB98Tgp9Qfrcjgi8G/ZKw7EdhngkNXBi4z1n04Bv9YA6GJiAyS9QqeN/0+RilJDTGlJ8a6GQALrAW8h1Q7fb4K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UuICcAHwixj8My2GJCIlGOs+DZxKdauY7ictL32iovGGmhIZEREREZERjHWzAV8Avk+1K5g2jsGfXeF4Q02JjIiIiIgMHWPdfMA8gAHeACwJrAC8G1gZmLniS54Tg9+o4jGHmjb7i4iIiMjQMNbNCvwdWLzByz4A7Njg9YaCNvuLiIiIyNCIwT8P/AhosmrYdjH4Rxq83lBQIiMiIiIiQyUGfzDwlYYud6iqFtZDiYyIiIiIDJ0Y/JHANkCs8TJXAHvXOP5QUyIjIiIiIkMpBv8zYHngLKpfanYn8OkY/PT9paQiqlomIiIiIkPPWLc08Dng08BbSw73ILB6DP7O0oHJmJTIiIiIiIiMYKxbCvgAqRTz8qTSzAuOc8oU4HrgD8ClwB9j8M/VHeewUyIjIiIiIjIBY93cwHuAlUiJzTzA46R9MBfF4B9tLzoREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREZGO+38Lxos3aVVmpAAAAABJRU5ErkJggg==" alt="签名" style="height:36pt;margin-left:6px;vertical-align:middle">
+      
+      <span style="margin-left:32px">日期：2026-05-20</span>
+    </div>
+
+  </div>
+  <div class="pg-footer">3 / 10</div>
+</div>
+
+
+
+
+
+<div class="page" id="p4">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body" style="padding-top:70px">
+    <div class="photo-page-title">车辆图片</div>
+    <div class="photo-page-sub">【外观件检测标准】：是否存在钣金、喷漆、更换、改装、损伤、钣件缝隙是否均匀等，非法改装外观车辆不做承保。</div>
+
+    
+    
+    <div class="photo-row" style="height:56mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">01</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">02</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">左前</div>
+      
+      <div class="photo-label">右后</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:56mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">03</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">04</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">仪表盘</div>
+      
+      <div class="photo-label">铭牌</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:56mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">05</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">06</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">车架号</div>
+      
+      <div class="photo-label">行驶证</div>
+      
+      
+    </div>
+    
+
+  </div>
+  <div class="pg-footer">4 / 10</div>
+</div>
+
+<div class="page" id="p5">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body" style="padding-top:70px">
+    <div class="photo-page-title">车辆图片（续）</div>
+    
+
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">07</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">08</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">前防撞梁</div>
+      
+      <div class="photo-label">左前纵梁</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">09</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">10</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">右前纵梁</div>
+      
+      <div class="photo-label">防火墙(前围板)</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">11</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">12</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">发动机舱盖</div>
+      
+      <div class="photo-label">发动机舱盖</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">13</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">14</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">副驾座椅轨道及骨架</div>
+      
+      <div class="photo-label">右前安全带及插座</div>
+      
+      
+    </div>
+    
+
+  </div>
+  <div class="pg-footer">5 / 10</div>
+</div>
+
+<div class="page" id="p6">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body" style="padding-top:70px">
+    <div class="photo-page-title">车辆图片（续）</div>
+    
+
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">15</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">16</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">备胎槽(行李箱底板)</div>
+      
+      <div class="photo-label">后围板</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">17</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">18</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">右后纵梁</div>
+      
+      <div class="photo-label">左后纵梁</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">19</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">20</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">后防撞梁</div>
+      
+      <div class="photo-label">后保险杠</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:42mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">21</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">22</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">仪表台骨架</div>
+      
+      <div class="photo-label">左前地毯(含周边饰条/饰板)</div>
+      
+      
+    </div>
+    
+
+  </div>
+  <div class="pg-footer">6 / 10</div>
+</div>
+
+<div class="page" id="p7">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body" style="padding-top:70px">
+    <div class="photo-page-title">车辆图片（续）</div>
+    
+
+    
+    
+    <div class="photo-row" style="height:85mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">23</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">24</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">OBD插接件</div>
+      
+      <div class="photo-label">车身底板</div>
+      
+      
+    </div>
+    
+    
+    <div class="photo-row" style="height:85mm">
+      
+      
+      <div class="photo-slot">
+        
+          <div class="ph">
+            <div class="ph-num">25</div>
+            <div>暂无照片</div>
+          </div>
+        
+      </div>
+      
+      
+      
+      <div class="photo-slot" style="background:transparent;border-color:transparent"></div>
+      
+    </div>
+    
+    <div class="photo-label-row">
+      
+      <div class="photo-label">车身底板</div>
+      
+      
+      <div class="photo-label" style="background:transparent;border-color:transparent"></div>
+      
+    </div>
+    
+
+  </div>
+  <div class="pg-footer">7 / 10</div>
+</div>
+
+
+
+
+
+
+
+<div class="page" id="p8">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body fill">
+    
+      
+        
+        <div class="sec-block" style="flex-grow:63;margin-bottom:8px">
+          <div class="check-section-header">事故检测（63项）</div>
+          <div class="check-section-desc">【判断标准】事故车指车辆结构经过撞击等外力作用，即使修复但仍存在安全隐患的车辆总称</div>
+          <div class="check-grid">
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前大灯框架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">前防撞梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前吸能盒</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前吸能盒</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">水箱框架可拆卸</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">水箱框架不可拆卸</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">防火墙(前围板)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前纵梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前纵梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前减震器座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前翼子板骨架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右A柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右A柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧上边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前安全带</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右B柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右B柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右C柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右C柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧下边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后安全带</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右D柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右D柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后翼子板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后翼子板导水槽</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后翼子板内侧(骨架)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后尾灯框架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后减震器座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后轮旋</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">行李箱后遮物板(铁质)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">备胎槽(行李箱底板)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">后围板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后纵梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后纵梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">底板纵梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">底板横梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">后防撞梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">车身底板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后轮旋</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后尾灯框架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后翼子板导水槽</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后减震器座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后翼子板内侧(骨架)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后翼子板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左D柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左D柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后安全带</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左C柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左C柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左B柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左B柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧上边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧下边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">仪表台骨架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">仪表台</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">安全气囊</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前安全带</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左A柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左A柱内侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前翼子板骨架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前减震器座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前大灯框架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">车身大顶</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+          </div>
+        </div>
+      
+    
+      
+        
+        <div class="sec-block" style="flex-grow:29;margin-bottom:8px">
+          <div class="check-section-header">泡水检测（29项）</div>
+          <div class="check-section-desc">【判断标准】泡水车指车辆被水浸泡过，导致车辆电气系统、机械系统等受损的车辆</div>
+          <div class="check-grid">
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">机舱保险盒</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前地毯(含周边饰条/饰板)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">仪表台空调出风口</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">仪表台骨架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">转向管柱</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">机舱电器插接件</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">OBD插接件</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">点烟器座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧门槛内部空腔</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">主驾座椅轨道及骨架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧门槛线束</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前底板隔音胶及封边胶</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后地毯(含周边饰条/饰板)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后安全带及插座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧脚部出风口</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">后排座椅骨架及海绵</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">车内顶棚</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">备胎槽(行李箱底板)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">行李箱底板线束及保险盒</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后地毯(含周边饰条/饰板)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧门槛线束</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧脚部出风口</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后安全带及插座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧门槛内部空腔</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前底板隔音胶及封边胶</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前地毯(含周边饰条/饰板)</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">副驾座椅轨道及骨架</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前安全带及插座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前安全带及插座</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+          </div>
+        </div>
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  <div class="pg-footer">8 / 10</div>
+</div>
+
+<div class="page" id="p9">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body fill">
+    
+      
+    
+      
+    
+      
+        
+        <div class="sec-block" style="flex-grow:23;margin-bottom:8px">
+          <div class="check-section-header">火烧检测（23项）</div>
+          <div class="check-section-desc">【判断标准】火烧车指车辆曾经发生过火灾，导致车辆部件受损的车辆</div>
+          <div class="check-grid">
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">燃油箱及管路</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">发动机舱内管路</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">蓄电池及附件</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">发动机舱隔音棉</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">机舱线束及标签</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">发动机舱塑料件</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">机舱保险盒</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">防火墙隔热棉</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前减震器座周边胶体</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前减震器座周边胶体</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">主驾驶座椅无火烧痕迹</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">仪表台及附件</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">驾驶舱内饰板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">驾驶舱内线束及插接件</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">后排座椅</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后轮旋</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">行李箱</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">行李箱内饰板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">行李箱底板线束及保险盒</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后轮旋</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">车身底板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">车身覆盖件</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">副驾驶座椅</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+          </div>
+        </div>
+      
+    
+      
+        
+        <div class="sec-block" style="flex-grow:52;margin-bottom:8px">
+          <div class="check-section-header">车身外观检测（52项）</div>
+          <div class="check-section-desc">【判断标准】检测车辆外观覆盖件是否存在钣金、喷漆、更换等痕迹</div>
+          <div class="check-grid">
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">前中网</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">前保险杠</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">发动机舱盖</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">前风挡玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">天窗玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">车身大顶</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前大灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前雾灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前雾灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前大灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前翼子板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右A柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右A柱三角玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧外后视镜</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前门</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右前门玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧下边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右下边梁外饰板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右B柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧上边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后门</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后门玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右C柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧C柱三角玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右D柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右侧D柱三角玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后翼子板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">后风挡玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">行李箱盖</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后尾灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">右后行李箱盖尾灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">后保险杠</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">后雾灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后行李箱盖尾灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后尾灯</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后翼子板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左D柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧D柱三角玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧C柱三角玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左C柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后门</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左后门玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左B柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧上边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧下边梁</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左下边梁外饰板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前门</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前门玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左A柱三角玻璃</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左A柱外侧</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左侧外后视镜</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">左前翼子板</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+          </div>
+        </div>
+      
+    
+      
+    
+  </div>
+  <div class="pg-footer">9 / 10</div>
+</div>
+
+
+
+
+
+<div class="page" id="p10">
+  <div class="pg-header">报告编号：</div>
+  <div class="page-body fill">
+
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+        <div class="sec-block" style="flex-grow:14;margin-bottom:10px">
+          <div class="check-section-header">记录模块（7项）</div>
+          <div class="check-section-desc">【记录模块】车辆各类电子记录检测结果</div>
+          <div class="check-grid">
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">出险记录</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">维保记录</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">云端记录</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">故障码记录</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">obd读取记录</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">电池包检测记录</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+              
+              <div class="check-item">
+                <div class="ci-icon ok">✓</div>
+                <div class="ci-name">电车电池记录</div>
+                <div class="ci-status ok">正常</div>
+              </div>
+            
+          </div>
+        </div>
+      
+    
+
+    <div class="disclaimer-block" style="flex-grow:60">
+      <div class="disclaimer-title">免责声明</div>
+      <div class="disclaimer-text" style="line-height:2.3">
+        温馨提示：1、本服务由广州国际检机动车鉴定评估有限公司提供。
+        2、国际检对指定车辆进行不解体静态检测，即车辆处于原地静止状态检测，动力系统仅限原地着车检测，不包含车辆动态行驶性能检测。
+        3、根据检测需要仅对车辆辅件、内饰进行拆解，不对车辆加强件、结构件、动力总成做深度拆解。
+        4、车辆基础信息是检测人员根据所检测车辆权属证书等资料进行填写的，如有不一致，以车辆实际权属证书等资料信息为准。
+        5、本检测报告中的"表显里程"是检测人员根据所检测车辆仪表上显示的里程数进行填写的，仅供参考。
+        6、如检测过程中车辆某检测项需使用举升机或需要拆解，但车主拒绝，报告中此检测项将展示"受限"字样；如检测过程中车辆某检测项受外部环境或其他原因影响导致无法检测，报告中此检测项将展示"受限"字样；国际检不对以上检测项产生的任何疑问负责。
+        7、如对检测标准有异议或需要对检测报告进行解读，请联系国际检客服。
+        8、本公司检测标准 GB/T-30323-2013 二手车鉴定评估技术规范 + T/CADA18-2021 乘用车鉴定评估技术规范 + 国际检检测标准等相关检测标准综合评估而成，检测结果仅代表国际检检测评估结果。最终解释权归国际检所有（广州国际检机动车鉴定评估有限公司）。
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">10 / 10</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+function openShare(){
+  var url = window.location.href;
+  document.getElementById('shareLink').value = url;
+  var qrBox = document.getElementById('shareQr');
+  qrBox.innerHTML = '';
+  try{
+    var qr = qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    qrBox.innerHTML = qr.createImgTag(5, 8);
+  }catch(e){
+    qrBox.innerHTML = '<span style="color:#999;font-size:12px">二维码生成失败（请使用复制链接）</span>';
+  }
+  document.getElementById('shareMask').classList.add('open');
+}
+function closeShare(){
+  document.getElementById('shareMask').classList.remove('open');
+}
+function copyShareLink(){
+  var input = document.getElementById('shareLink');
+  var btn = document.getElementById('shareCopyBtn');
+  var done = function(){
+    var orig = btn.textContent;
+    btn.textContent = '已复制 ✓';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(input.value).then(done, function(){
+      input.select(); document.execCommand('copy'); done();
+    });
+  }else{
+    input.select(); document.execCommand('copy'); done();
+  }
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeShare();
+});
+</script>
+
+</body>
+</html>

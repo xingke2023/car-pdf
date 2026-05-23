@@ -7,7 +7,7 @@
 import fitz
 import os
 
-PDF = "authfile1852026011497984810(1).pdf"
+PDF = "template_decrypted.pdf"
 OUT_DIR = "slot_map"
 os.makedirs(OUT_DIR, exist_ok=True)
 
