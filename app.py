@@ -5,13 +5,17 @@
 浏览器打开: http://localhost:5000
 """
 import os, io, json, tempfile, shutil, zipfile, base64, copy
-from flask import Flask, request, jsonify, send_file, render_template_string, render_template
+from datetime import timedelta
+from flask import Flask, request, jsonify, send_file, render_template_string, render_template, session, redirect, url_for
 
 WORK_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__, template_folder=os.path.join(WORK_DIR, 'templates'))
 app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=2)
+app.secret_key = os.environ.get('CAR_PDF_SECRET') or 'gjj-car-pdf-secret-2026-please-change-in-prod'
+LOGIN_PASSWORD = 'gjj2026'
 DEFAULT_TEMPLATE = os.path.join(WORK_DIR, 'template_decrypted.pdf')
 MIN_IMG_SIZE = 400  # 大图阈值（px）
 
@@ -308,8 +312,76 @@ def render_preview(page_num_0idx, scale=0.45):
 
 # ─── API 路由 ──────────────────────────────────────────────────
 
+def _render_login_page(err_msg='', next_url='/'):
+    from markupsafe import escape
+    err_cls = 'class="err"' if err_msg else ''
+    nxt = escape(next_url)
+    msg = escape(err_msg)
+    return ('<!doctype html><html lang="zh"><head>'
+        '<meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">'
+        '<title>检测认证评估报告 · 登录</title>'
+        '<style>'
+        '*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}'
+        'body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;'
+        'background:#000;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}'
+        '.box{width:100%;max-width:360px;text-align:center}'
+        'h1{font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:2px}'
+        '.sub{color:#888;font-size:13px;margin-bottom:48px;letter-spacing:1px}'
+        'input[type=password]{width:100%;background:#1a1a1a;border:1px solid #333;color:#fff;'
+        'border-radius:12px;padding:14px 16px;font-size:16px;outline:none;margin-bottom:14px}'
+        'input[type=password]:focus{border-color:#ff3b30}'
+        'input[type=password].err{border-color:#ff3b30;background:#2a1010}'
+        'button{width:100%;background:#ff3b30;color:#fff;border:none;border-radius:12px;'
+        'padding:14px;font-size:16px;font-weight:700;letter-spacing:2px}'
+        'button:active{opacity:.8}'
+        '.err-msg{color:#ff3b30;font-size:13px;height:18px;margin-top:8px}'
+        '</style></head><body>'
+        '<form class="box" method="post" action="/login" autocomplete="off">'
+        '<h1>检测认证评估报告</h1>'
+        '<div class="sub">请输入访问密码</div>'
+        f'<input type="password" name="password" placeholder="密码" autofocus {err_cls}>'
+        '<button type="submit">登录</button>'
+        f'<div class="err-msg">{msg}</div>'
+        f'<input type="hidden" name="next" value="{nxt}">'
+        '</form></body></html>')
+
+
+def _is_logged_in():
+    return session.get('auth') is True
+
+
+def _safe_next(url):
+    if not url or not url.startswith('/') or url.startswith('//'):
+        return '/'
+    return url
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        pw = (request.form.get('password') or '').strip()
+        nxt = _safe_next(request.form.get('next') or '/')
+        if pw == LOGIN_PASSWORD:
+            session.permanent = True
+            session['auth'] = True
+            return redirect(nxt)
+        return _render_login_page('密码错误，请重试', nxt), 401, {'Content-Type': 'text/html; charset=utf-8'}
+
+    nxt = _safe_next(request.args.get('next') or '/')
+    return _render_login_page('', nxt), 200, {'Content-Type': 'text/html; charset=utf-8'}
+
+
+@app.route('/logout')
+def logout():
+    session.pop('auth', None)
+    return redirect(url_for('login'))
+
+
 @app.route('/')
 def index():
+    if not _is_logged_in():
+        return redirect(url_for('login', next=request.path))
     guide_path = os.path.join(WORK_DIR, 'photo_guide_v2.html')
     with open(guide_path, 'rb') as f:
         content = f.read()
@@ -487,10 +559,10 @@ import uuid, threading, time, re
 _PDF_CACHE = {}
 _PDF_CACHE_LOCK = threading.Lock()
 
-# 已分享报告：磁盘持久化 30 天
+# 已分享报告：磁盘持久化 6 个月
 SHARED_REPORTS_DIR = os.path.join(WORK_DIR, 'shared_reports')
 os.makedirs(SHARED_REPORTS_DIR, exist_ok=True)
-HTML_SHARE_TTL = 30 * 24 * 3600  # 30 天
+HTML_SHARE_TTL = 180 * 24 * 3600  # 6 个月
 
 _HEX32_RE = re.compile(r'^[0-9a-f]{32}$')
 # 新格式 token：YYYYMMDD-VIN（17位字母数字）或 YYYYMMDD-NNN（3+位数字流水）
@@ -507,6 +579,12 @@ def _shared_html_path(token):
     if not (_HEX32_RE.match(t) or _TOKEN_RE.match(t)):
         return None
     return os.path.join(SHARED_REPORTS_DIR, f'{t}.html')
+
+def _shared_pdf_path(token):
+    t = token or ''
+    if not (_HEX32_RE.match(t) or _TOKEN_RE.match(t)):
+        return None
+    return os.path.join(SHARED_REPORTS_DIR, f'{t}.pdf')
 
 def _normalize_date(s):
     """从 'YYYY-MM-DD' / 'YYYY/MM/DD' / 'YYYY-MM-DD HH:MM:SS' 抽出 YYYYMMDD；失败返回今天。"""
@@ -543,11 +621,11 @@ def _build_report_token(info):
     return _next_seq_token(date_str)
 
 def _cleanup_shared_html():
-    """删除超过 30 天的已分享报告。"""
+    """删除超过 6 个月的已分享报告（HTML 与 PDF）。"""
     try:
         now = time.time()
         for name in os.listdir(SHARED_REPORTS_DIR):
-            if not name.endswith('.html'):
+            if not (name.endswith('.html') or name.endswith('.pdf')):
                 continue
             path = os.path.join(SHARED_REPORTS_DIR, name)
             try:
@@ -569,7 +647,7 @@ threading.Thread(target=_shared_html_janitor, daemon=True).start()
 
 @app.route('/report/pdf', methods=['POST', 'OPTIONS'])
 def generate_report_pdf():
-    """生成 PDF，存入临时缓存，返回下载 token"""
+    """生成 PDF，持久化到磁盘 6 个月，返回下载 token"""
     if request.method == 'OPTIONS':
         return '', 204
     from playwright.sync_api import sync_playwright
@@ -593,16 +671,34 @@ def generate_report_pdf():
         _PDF_CACHE[token] = pdf_bytes
     threading.Thread(target=_expire_pdf, args=(token,), daemon=True).start()
 
+    path = _shared_pdf_path(token)
+    if path:
+        try:
+            with open(path, 'wb') as f:
+                f.write(pdf_bytes)
+        except OSError:
+            pass
+
     return jsonify({'token': token})
 
 
 @app.route('/report/pdf/<token>')
 def download_report_pdf(token):
-    """通过 token 下载已生成的 PDF（兼容 iOS Safari）"""
+    """通过 token 下载已分享的 PDF（6 个月有效，兼容 iOS Safari）"""
     with _PDF_CACHE_LOCK:
         pdf_bytes = _PDF_CACHE.get(token)
+
     if not pdf_bytes:
-        return '链接已过期，请重新生成', 404
+        path = _shared_pdf_path(token)
+        if not path or not os.path.exists(path):
+            return '链接已过期，请重新生成', 404
+        if time.time() - os.path.getmtime(path) > HTML_SHARE_TTL:
+            try: os.remove(path)
+            except OSError: pass
+            return '链接已过期，请重新生成', 404
+        with open(path, 'rb') as f:
+            pdf_bytes = f.read()
+
     return send_file(
         io.BytesIO(pdf_bytes),
         mimetype='application/pdf',
@@ -613,7 +709,7 @@ def download_report_pdf(token):
 
 @app.route('/report/html', methods=['POST', 'OPTIONS'])
 def generate_report_html_token():
-    """生成 HTML 报告，持久化到磁盘 30 天，返回 token（兼容 iOS Safari）"""
+    """生成 HTML 报告，持久化到磁盘 6 个月，返回 token（兼容 iOS Safari）"""
     if request.method == 'OPTIONS':
         return '', 204
     payload = request.json or {}
@@ -629,7 +725,7 @@ def generate_report_html_token():
 
 @app.route('/report/html/<token>')
 def download_report_html(token):
-    """通过 token 查看已分享的 HTML 报告（30 天有效）"""
+    """通过 token 查看已分享的 HTML 报告（6 个月有效）"""
     path = _shared_html_path(token)
     if not path or not os.path.exists(path):
         return '链接已过期，请重新生成', 404
